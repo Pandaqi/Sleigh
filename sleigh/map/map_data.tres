@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapData" load_steps=2 format=3 uid="uid://bnf7t7l0i17r7"]
+
+[ext_resource type="Script" uid="uid://ob6tpbrvllp5" path="res://sleigh/map/map_data.gd" id="1_co4uo"]
+
+[resource]
+script = ExtResource("1_co4uo")
+metadata/_custom_type_script = "uid://ob6tpbrvllp5"

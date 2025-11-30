@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b338djlf45txh"]
+
+[ext_resource type="Script" uid="uid://bs7hphgb5ksl8" path="res://sleigh/map/building/building.gd" id="1_043bo"]
+[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_4ry06"]
+[ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="3_4ry06"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tthtb"]
+size = Vector3(1, 3, 1)
+
+[node name="Building" type="StaticBody3D" unique_id=1833297393 node_paths=PackedStringArray("col_shape", "sprite", "module_mini_map")]
+script = ExtResource("1_043bo")
+col_shape = NodePath("CollisionShape3D")
+sprite = NodePath("Sprite3D")
+module_mini_map = NodePath("ModuleMiniMap")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1018732272]
+texture = ExtResource("2_4ry06")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1595242334]
+shape = SubResource("BoxShape3D_tthtb")
+
+[node name="ModuleMiniMap" type="Node3D" parent="." unique_id=714399194]
+script = ExtResource("3_4ry06")
+metadata/_custom_type_script = "uid://bi3g4oooxayxu"
