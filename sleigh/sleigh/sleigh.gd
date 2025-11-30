@@ -4,7 +4,14 @@ class_name Sleigh
 @export var move_force := 10.0
 @export var lift_force := 25.0
 @export var debug_input := true
+
 @export var module_mini_map : ModuleMiniMap
+@export var module_delivery : ModuleDelivery
+@export var module_collider : ModuleCollider
+@export var module_gifts : ModuleGifts
+
+func _ready() -> void:
+	module_collider.collided.connect(module_gifts.drop_random_gift)
 
 func _input(_ev:InputEvent) -> void:
 	pass

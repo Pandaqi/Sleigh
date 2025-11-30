@@ -3,9 +3,9 @@ class_name MapVisualizer
 
 @export var building_scene : PackedScene
 @export var floor_scene : PackedScene
+@export var gift_scene : PackedScene
 @export var map_data : MapData
 @export var sleigh : Sleigh
-@export var bg : Sprite3D
 
 func visualize(g:MapGenerator) -> void:
 	var map_size := g.get_size()
@@ -15,8 +15,8 @@ func visualize(g:MapGenerator) -> void:
 	map_data.sleigh = sleigh
 	
 	# solid bg
-	bg.position.z = -1.5*bounds.z
-	bg.set_scale(Vector3(2.0*bounds.x, 5.0*bounds.y, 1.0))
+	#bg.position.z = -2*bounds.z
+	#bg.set_scale(Vector3(2.0*bounds.x, 5.0*bounds.y, 1.0))
 	
 	# floor beneath it all
 	var f : Floor = floor_scene.instantiate()
@@ -27,10 +27,21 @@ func visualize(g:MapGenerator) -> void:
 	for i in range(g.count_buildings()):
 		var b : Building = building_scene.instantiate()
 		var pos := g.building_positions[i]
-		b.position = Vector3(pos.x, 0, pos.y) - map_half_size
-		b.set_size(g.building_sizes[i])
+		var size := g.building_sizes[i]
+		# need to compensate for fact sprite/col_shape is always centered
+		b.position = Vector3(pos.x + 0.5*size.x, 0, pos.y + 0.5*size.z) - map_half_size
+		b.set_type(g.building_types[i])
+		b.set_size(size)
 		add_child(b)
 		map_data.buildings.append(b)
+	
+	# the gifts
+	for i in range(g.count_gifts()):
+		var gift : Gift = gift_scene.instantiate()
+		gift.position = g.gift_positions[i] - map_half_size
+		gift.set_type(g.gift_types[i])
+		add_child(gift)
+		map_data.gifts.append(gift)
 	
 	# boundary around the world
 	var boundary_positions : Array[Vector3] = [

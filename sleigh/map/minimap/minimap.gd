@@ -2,8 +2,13 @@ extends Node2D
 class_name MiniMap
 
 const SIZE := Vector2i(256, 128)
+const EDGE_MARGIN := 16
 
 @export var map_data : MapData
+
+func _ready() -> void:
+	get_viewport().size_changed.connect(_on_size_changed)
+	_on_size_changed()
 
 func _draw() -> void:
 	var map_size := map_data.bounds
@@ -15,8 +20,16 @@ func _draw() -> void:
 	for b in map_data.buildings:
 		draw_rect(b.module_mini_map.get_rect(map_scale), b.module_mini_map.get_color(), true)
 	
+	for g in map_data.gifts:
+		draw_rect(g.module_mini_map.get_rect(map_scale), g.module_mini_map.get_color(), true)
+	
 	var sleigh_mm := map_data.sleigh.module_mini_map
 	draw_rect(sleigh_mm.get_rect(map_scale), sleigh_mm.get_color(), true)
 
 func _physics_process(_delta: float) -> void:
 	queue_redraw()
+
+func _on_size_changed() -> void:
+	var vp := get_viewport().get_visible_rect().size
+	set_position(Vector2(0.5*vp.x, 0.5*SIZE.y + EDGE_MARGIN))
+	

@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	var desired_size_x := bounds.x
 	var desired_size_y := height_width_ratio * bounds.y
 	var desired_size : float = max(desired_size_x, desired_size_y) + size_margin
-	size = lerp(size, desired_size, delta * zoom_speed)
+	size = desired_size
 	
-	var desired_position := Vector3(0, 0.5*size*(1.0/height_width_ratio), 2.0*bounds.z)
-	position = lerp(position, desired_position, delta * move_speed)
+	var desired_position := Vector3(0, 0.5*size*(1.0/height_width_ratio), 5.0*bounds.z)
+	position = desired_position
