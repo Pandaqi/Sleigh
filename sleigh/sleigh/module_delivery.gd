@@ -2,7 +2,7 @@ extends Node3D
 class_name ModuleDelivery
 
 signal visited(b:Building)
-signal delivered(b:Building)
+signal delivered(gifts: Array[Gift], b:Building)
 
 @export var module_gifts : ModuleGifts
 
@@ -17,5 +17,4 @@ func _on_visit_building(b:Building) -> void:
 	if matching_gifts.size() <= 0: return
 	
 	module_gifts.deliver_gifts(matching_gifts)
-	# @TODO: score points??
-	delivered.emit(b)
+	delivered.emit(matching_gifts, b)

@@ -11,6 +11,7 @@ func _ready() -> void:
 func _on_body_entered(body:Node) -> void:
 	if not (body is Gift): return
 	if not body.is_grabbable(): return
+	if module_gifts.is_full(): return
 	
 	call_deferred("collect_gift", body)
 

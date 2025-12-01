@@ -5,7 +5,7 @@ const MAP_SIZE := Vector2i(20, 10)
 const NUM_BUILDINGS := 10
 
 const BUILDING_HEIGHT_MIN := 1.0
-const BUILDING_HEIGHT_MAX := 6.0
+const BUILDING_HEIGHT_MAX := 8.0
 
 var building_positions : Array[Vector2i] = []
 var building_sizes : Array[Vector3] = []
@@ -17,12 +17,13 @@ var gift_types : Array[Gift.Type] = []
 
 var num_attempts := 0
 var failed := false
+var grid : MapGrid
 
 func generate() -> void:
 	num_attempts += 1
 	failed = false
 	
-	var grid := MapGrid.new()
+	grid = MapGrid.new()
 	grid.size = MAP_SIZE
 	grid.create()
 	
@@ -59,6 +60,7 @@ func generate() -> void:
 		var all_cells_filled := grid.get_square_around(pos, Vector2i(size.x, size.z))
 		for cell in all_cells_filled:
 			cell.set_content(GridCell.ContentType.BUILDING)
+			cell.set_building(i)
 		
 		# forbid anything in straight line in front of us
 		var cells_in_front := grid.get_cells_along_line(pos, Vector2.UP)
@@ -104,3 +106,14 @@ func count_buildings() -> int:
 
 func count_gifts() -> int:
 	return gift_positions.size()
+
+func get_best_sleigh_position() -> Vector3:
+	# check from front row to back, and place us on the first building we find
+	for y in range(grid.size.y-1, -1, -1):
+		var row : Array[GridCell] = grid.get_row(y)
+		for cell in row:
+			if cell.building < 0: continue
+			var height := building_sizes[cell.building].y
+			var margin_above := 1.0
+			return Vector3(cell.pos.x, height + margin_above, cell.pos.y)
+	return Vector3.ZERO

@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=3 uid="uid://dokcui25j7aay"]
+
+[ext_resource type="Script" uid="uid://cpp6ig46xue1p" path="res://sleigh/sleigh/sleigh.gd" id="1_wuwth"]
+[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_hm7cj"]
+[ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="3_0l66c"]
+[ext_resource type="Script" uid="uid://civey7fk2e1e1" path="res://sleigh/sleigh/module_mover.gd" id="3_bkv40"]
+[ext_resource type="Script" uid="uid://b6ii1tr8f1usd" path="res://sleigh/sleigh/module_delivery.gd" id="4_bkv40"]
+[ext_resource type="Script" uid="uid://c4o6w2b3rqn4g" path="res://sleigh/sleigh/module_collider.gd" id="5_7aq07"]
+[ext_resource type="Script" uid="uid://cy30dom8p0ejr" path="res://sleigh/sleigh/arrows/arrows.gd" id="5_foh4u"]
+[ext_resource type="Script" uid="uid://yn0eo0wfr3tl" path="res://sleigh/sleigh/module_gifts.gd" id="6_foh4u"]
+[ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="7_0l66c"]
+[ext_resource type="Script" uid="uid://weimd32n6iap" path="res://sleigh/sleigh/module_health.gd" id="7_hm7cj"]
+[ext_resource type="Script" uid="uid://b0rcvgf6equv2" path="res://sleigh/sleigh/module_grabber.gd" id="7_sgmq2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j7nqt"]
+friction = 0.0
+bounce = 0.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt3xt"]
+radius = 0.25146484
+height = 1.3369141
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_efyhh"]
+radius = 0.9365059
+
+[node name="Sleigh" type="RigidBody3D" unique_id=1548439675 node_paths=PackedStringArray("module_mini_map", "module_delivery", "module_collider", "module_gifts", "module_health", "module_grabber", "module_mover")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_j7nqt")
+linear_damp = 2.25
+script = ExtResource("1_wuwth")
+module_mini_map = NodePath("ModuleMiniMap")
+module_delivery = NodePath("ModuleDelivery")
+module_collider = NodePath("ModuleCollider")
+module_gifts = NodePath("ModuleGifts")
+module_health = NodePath("ModuleHealth")
+module_grabber = NodePath("ModuleGrabber")
+module_mover = NodePath("ModuleMover")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=432937084]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_rt3xt")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=547980011]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("2_hm7cj")
+
+[node name="ModuleMover" type="Node3D" parent="." unique_id=1535471441 node_paths=PackedStringArray("body")]
+script = ExtResource("3_bkv40")
+body = NodePath("..")
+
+[node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629]
+script = ExtResource("5_foh4u")
+
+[node name="ModuleMiniMap" type="Node3D" parent="." unique_id=1580184528]
+script = ExtResource("3_0l66c")
+color = Color(1, 0, 0, 1)
+size = Vector3(1, 1, 0.5)
+
+[node name="ModuleDelivery" type="Node3D" parent="." unique_id=203747243 node_paths=PackedStringArray("module_gifts")]
+script = ExtResource("4_bkv40")
+module_gifts = NodePath("../ModuleGifts")
+
+[node name="ModuleCollider" type="Node3D" parent="." unique_id=1070025929 node_paths=PackedStringArray("body")]
+script = ExtResource("5_7aq07")
+body = NodePath("..")
+
+[node name="ModuleGifts" type="Node3D" parent="." unique_id=1700441615]
+script = ExtResource("6_foh4u")
+map_data = ExtResource("7_0l66c")
+
+[node name="ModuleHealth" type="Node3D" parent="." unique_id=296194529 node_paths=PackedStringArray("body")]
+script = ExtResource("7_hm7cj")
+body = NodePath("..")
+
+[node name="ModuleGrabber" type="Node3D" parent="." unique_id=2079427754 node_paths=PackedStringArray("sleigh", "area", "module_gifts")]
+script = ExtResource("7_sgmq2")
+sleigh = NodePath("..")
+area = NodePath("Area3D")
+module_gifts = NodePath("../ModuleGifts")
+
+[node name="Area3D" type="Area3D" parent="ModuleGrabber" unique_id=1958977771]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ModuleGrabber/Area3D" unique_id=1522893498]
+shape = SubResource("SphereShape3D_efyhh")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1676964101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23097324)
+light_color = Color(0.99999994, 0.9449043, 0.73787695, 1)
+light_energy = 2.5
+omni_range = 5.8353486

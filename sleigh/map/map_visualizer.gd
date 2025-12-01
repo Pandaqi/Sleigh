@@ -4,15 +4,24 @@ class_name MapVisualizer
 @export var building_scene : PackedScene
 @export var floor_scene : PackedScene
 @export var gift_scene : PackedScene
+@export var sleigh_scene : PackedScene
 @export var map_data : MapData
-@export var sleigh : Sleigh
+@export var ui : UI
 
 func visualize(g:MapGenerator) -> void:
+	if map_data.sleigh: map_data.sleigh.queue_free()
+	
 	var map_size := g.get_size()
 	var map_half_size := Vector3(0.5*map_size.x, 0, 0.5*map_size.y)
 	var bounds := g.get_bounds()
 	map_data.bounds = bounds
+	
+	# place sleigh
+	var sleigh : Sleigh = sleigh_scene.instantiate()
 	map_data.sleigh = sleigh
+	sleigh.position = g.get_best_sleigh_position() - map_half_size + Vector3(0.5, 0, 0.5)
+	sleigh.module_mover.ui_container = ui
+	add_child(sleigh)
 	
 	# solid bg
 	#bg.position.z = -2*bounds.z
@@ -36,9 +45,12 @@ func visualize(g:MapGenerator) -> void:
 		map_data.buildings.append(b)
 	
 	# the gifts
+	var gift_size := 0.5 # @TODO: Global.config.gift_size
 	for i in range(g.count_gifts()):
 		var gift : Gift = gift_scene.instantiate()
-		gift.position = g.gift_positions[i] - map_half_size
+		var raw_pos := g.gift_positions[i] - map_half_size
+		gift.position = randomize_position_within_cell(raw_pos)
+		gift.set_size(gift_size)
 		gift.set_type(g.gift_types[i])
 		add_child(gift)
 		map_data.gifts.append(gift)
@@ -72,7 +84,6 @@ func visualize(g:MapGenerator) -> void:
 		
 		boundary.add_child(shape_node)
 	add_child(boundary)
-	
-	
-	
-	
+
+func randomize_position_within_cell(pos:Vector3) -> Vector3:
+	return pos + Vector3(randf()-0.5, randf()-0.5, randf()-0.5)

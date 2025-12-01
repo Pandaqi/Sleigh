@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://msicby0slq1g"]
 
 [ext_resource type="Script" uid="uid://cjlg6dgrrljwi" path="res://sleigh/gift/gift.gd" id="1_5vlms"]
-[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_fj2uc"]
 [ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="2_mhtne"]
+[ext_resource type="PackedScene" uid="uid://dblb3tctrvpsk" path="res://sleigh/shared/asset_sprite.tscn" id="3_fj2uc"]
 [ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="3_mhtne"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ior8"]
@@ -18,10 +18,8 @@ sprite = NodePath("Sprite3D")
 map_data = ExtResource("2_mhtne")
 module_mini_map = NodePath("ModuleMiniMap")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1786618059]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+[node name="Sprite3D" parent="." unique_id=1537408286 instance=ExtResource("3_fj2uc")]
 billboard = 1
-texture = ExtResource("2_fj2uc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1987164378]
 shape = SubResource("BoxShape3D_6ior8")

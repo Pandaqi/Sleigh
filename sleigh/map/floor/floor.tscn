@@ -1,9 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cspl0v1u5o2ci"]
+[gd_scene load_steps=3 format=3 uid="uid://cspl0v1u5o2ci"]
 
 [ext_resource type="Script" uid="uid://dtcfr2porim1v" path="res://sleigh/map/floor/floor.gd" id="1_xxb5a"]
+[ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="2_8wiyj"]
 
-[node name="Floor" type="Node3D" unique_id=1903491033 node_paths=PackedStringArray("sprite")]
+[node name="Floor" type="Node3D" unique_id=1903491033 node_paths=PackedStringArray("sprite", "area", "col_shape")]
 script = ExtResource("1_xxb5a")
 sprite = NodePath("Sprite3D")
+map_data = ExtResource("2_8wiyj")
+area = NodePath("Area3D")
+col_shape = NodePath("Area3D/CollisionShape3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1067366800]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1234166662]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=395490682]

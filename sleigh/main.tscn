@@ -1,20 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://dhexc5kxv8rjt"]
+[gd_scene load_steps=15 format=3 uid="uid://dhexc5kxv8rjt"]
 
 [ext_resource type="Script" uid="uid://b2osy7g4nh1uw" path="res://sleigh/map/map.gd" id="1_3fl1h"]
 [ext_resource type="Script" uid="uid://cmo7eflm8fgbt" path="res://sleigh/map/camera/camera.gd" id="1_17jm3"]
 [ext_resource type="Script" uid="uid://ch87ibenuhokv" path="res://sleigh/map/map_generator.gd" id="1_tthtb"]
 [ext_resource type="Script" uid="uid://bduidd1ckhlth" path="res://sleigh/map/map_visualizer.gd" id="2_ffeu0"]
-[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_tmjjm"]
+[ext_resource type="PackedScene" uid="uid://dokcui25j7aay" path="res://sleigh/sleigh/sleigh.tscn" id="3_fqevc"]
 [ext_resource type="PackedScene" uid="uid://b338djlf45txh" path="res://sleigh/map/building/building.tscn" id="3_kwj5i"]
-[ext_resource type="Script" uid="uid://cpp6ig46xue1p" path="res://sleigh/sleigh/sleigh.gd" id="3_tmjjm"]
 [ext_resource type="PackedScene" uid="uid://cspl0v1u5o2ci" path="res://sleigh/map/floor/floor.tscn" id="4_3fl1h"]
 [ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="4_f7sgw"]
-[ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="5_j7nqt"]
-[ext_resource type="Script" uid="uid://b6ii1tr8f1usd" path="res://sleigh/sleigh/module_delivery.gd" id="6_1iysh"]
-[ext_resource type="Script" uid="uid://c4o6w2b3rqn4g" path="res://sleigh/sleigh/module_collider.gd" id="7_i7510"]
-[ext_resource type="Script" uid="uid://yn0eo0wfr3tl" path="res://sleigh/sleigh/module_gifts.gd" id="8_6ior8"]
-[ext_resource type="Script" uid="uid://b0rcvgf6equv2" path="res://sleigh/sleigh/module_grabber.gd" id="9_efyhh"]
+[ext_resource type="Script" uid="uid://d0roff05s5x1" path="res://sleigh/ui/ui.gd" id="10_1iysh"]
 [ext_resource type="Script" uid="uid://ous4irav610w" path="res://sleigh/map/minimap/minimap.gd" id="10_fqevc"]
+[ext_resource type="Script" uid="uid://b18bebtkcnr6c" path="res://sleigh/score/score.gd" id="10_i7510"]
+[ext_resource type="Texture2D" uid="uid://ukm4mtekm3x7" path="res://sleigh/shared/assets.webp" id="11_j7nqt"]
 [ext_resource type="PackedScene" uid="uid://msicby0slq1g" path="res://sleigh/gift/gift.tscn" id="15_efyhh"]
 
 [sub_resource type="Environment" id="Environment_efyhh"]
@@ -22,17 +19,6 @@ background_mode = 1
 background_color = Color(0.1764706, 0.1882353, 0.42745098, 1)
 ambient_light_color = Color(0.47701287, 0.67929125, 0.9886314, 1)
 ambient_light_energy = 3.0
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j7nqt"]
-friction = 0.0
-bounce = 0.1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt3xt"]
-radius = 0.25146484
-height = 1.3369141
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_efyhh"]
-radius = 0.9365059
 
 [node name="Main" type="Node3D" unique_id=690436519]
 
@@ -48,61 +34,6 @@ size = 20.0
 script = ExtResource("1_17jm3")
 map_data = ExtResource("4_f7sgw")
 
-[node name="Sleigh" type="RigidBody3D" parent="." unique_id=151447393 node_paths=PackedStringArray("module_mini_map", "module_delivery", "module_collider", "module_gifts")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6792939, 4.0216904, -0.06598663)
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-physics_material_override = SubResource("PhysicsMaterial_j7nqt")
-linear_damp = 2.0
-script = ExtResource("3_tmjjm")
-module_mini_map = NodePath("ModuleMiniMap")
-module_delivery = NodePath("ModuleDelivery")
-module_collider = NodePath("ModuleCollider")
-module_gifts = NodePath("ModuleGifts")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sleigh" unique_id=1728418315]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_rt3xt")
-
-[node name="Sprite3D" type="Sprite3D" parent="Sleigh" unique_id=697659580]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-texture = ExtResource("2_tmjjm")
-
-[node name="ModuleMiniMap" type="Node3D" parent="Sleigh" unique_id=1397758537]
-script = ExtResource("5_j7nqt")
-color = Color(1, 0, 0, 1)
-size = Vector3(1, 1, 0.5)
-
-[node name="ModuleDelivery" type="Node3D" parent="Sleigh" unique_id=1882491060 node_paths=PackedStringArray("module_gifts")]
-script = ExtResource("6_1iysh")
-module_gifts = NodePath("../ModuleGifts")
-
-[node name="ModuleCollider" type="Node3D" parent="Sleigh" unique_id=1343188916 node_paths=PackedStringArray("body")]
-script = ExtResource("7_i7510")
-body = NodePath("..")
-
-[node name="ModuleGifts" type="Node3D" parent="Sleigh" unique_id=935709083]
-script = ExtResource("8_6ior8")
-
-[node name="ModuleGrabber" type="Node3D" parent="Sleigh" unique_id=661358221 node_paths=PackedStringArray("sleigh", "area", "module_gifts")]
-script = ExtResource("9_efyhh")
-sleigh = NodePath("..")
-area = NodePath("Area3D")
-module_gifts = NodePath("../ModuleGifts")
-
-[node name="Area3D" type="Area3D" parent="Sleigh/ModuleGrabber" unique_id=265530797]
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sleigh/ModuleGrabber/Area3D" unique_id=171341441]
-shape = SubResource("SphereShape3D_efyhh")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Sleigh" unique_id=502211244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23097324)
-light_color = Color(0.99999994, 0.9449043, 0.73787695, 1)
-light_energy = 2.5
-omni_range = 5.8353486
-
 [node name="Map" type="Node3D" parent="." unique_id=954127945 node_paths=PackedStringArray("generator", "visualizer")]
 script = ExtResource("1_3fl1h")
 generator = NodePath("Generator")
@@ -112,17 +43,25 @@ map_data = ExtResource("4_f7sgw")
 [node name="Generator" type="Node3D" parent="Map" unique_id=1489835639]
 script = ExtResource("1_tthtb")
 
-[node name="Visualizer" type="Node3D" parent="Map" unique_id=2060043554 node_paths=PackedStringArray("sleigh")]
+[node name="Visualizer" type="Node3D" parent="Map" unique_id=2060043554 node_paths=PackedStringArray("ui")]
 script = ExtResource("2_ffeu0")
 building_scene = ExtResource("3_kwj5i")
 floor_scene = ExtResource("4_3fl1h")
 gift_scene = ExtResource("15_efyhh")
+sleigh_scene = ExtResource("3_fqevc")
 map_data = ExtResource("4_f7sgw")
-sleigh = NodePath("../../Sleigh")
+ui = NodePath("../../UI")
+
+[node name="Score" type="Node3D" parent="." unique_id=359371305 node_paths=PackedStringArray("ui")]
+script = ExtResource("10_i7510")
+map_data = ExtResource("4_f7sgw")
+ui = NodePath("../UI")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2091701466]
+script = ExtResource("10_1iysh")
 
 [node name="Minimap" type="Node2D" parent="UI" unique_id=297920205]
 position = Vector2(459, 333)
 script = ExtResource("10_fqevc")
 map_data = ExtResource("4_f7sgw")
+texture_assets = ExtResource("11_j7nqt")

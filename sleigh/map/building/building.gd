@@ -3,6 +3,7 @@ class_name Building
 
 @export var col_shape : CollisionShape3D
 @export var sprite : Sprite3D
+@export var sprite_type : Sprite3D
 @export var module_mini_map : ModuleMiniMap
 var size : Vector3
 
@@ -18,7 +19,7 @@ func _ready() -> void:
 
 func set_type(tp:Gift.Type) -> void:
 	type_wanted = tp
-	# @TODO: update frame
+	sprite_type.frame = Gift.get_gift_frame_for_type(tp)
 
 func set_size(s:Vector3) -> void:
 	size = s
@@ -32,6 +33,8 @@ func set_size(s:Vector3) -> void:
 	sprite.set_scale(Vector3(s.x, s.y, 1.0) / base_size)
 	sprite.position.z -= 0.5*s.z
 	sprite.position.y = 0.5*s.y
+	sprite_type.position.y = sprite.position.y
+	sprite_type.position.z = sprite.position.z + 0.003
 	
 	module_mini_map.set_size(s)
 	

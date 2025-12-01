@@ -15,6 +15,11 @@ run/main_scene="uid://dhexc5kxv8rjt"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [input]
 
 sleigh_up={
@@ -28,6 +33,14 @@ sleigh_down={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -36,3 +49,4 @@ sleigh_down={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

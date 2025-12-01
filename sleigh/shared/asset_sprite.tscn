@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dblb3tctrvpsk"]
+
+[ext_resource type="Texture2D" uid="uid://ukm4mtekm3x7" path="res://sleigh/shared/assets.webp" id="1_ssq5n"]
+
+[node name="Sprite3D" type="Sprite3D" unique_id=1537408286]
+texture = ExtResource("1_ssq5n")
+hframes = 4
+vframes = 4

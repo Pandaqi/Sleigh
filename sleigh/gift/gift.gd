@@ -4,6 +4,7 @@ class_name Gift
 enum Type
 {
 	SQUARE,
+	STAR,
 	CIRCLE,
 	TRIANGLE
 }
@@ -24,15 +25,36 @@ var state := State.NONE
 
 @export var module_mini_map : ModuleMiniMap
 
+static func get_gift_frame_for_type(tp:Type) -> int:
+	if tp == Type.SQUARE: return 0
+	if tp == Type.STAR: return 1
+	if tp == Type.CIRCLE: return 2
+	if tp == Type.TRIANGLE: return 3
+	return -1
+
 func _ready() -> void:
+	mass = 0.2 # @TODO: Global.config.gift_mass
 	change_state(State.FREE)
+
+func set_size(s:float) -> void:
+	var base_size := 256.0 / 100.0
+	sprite.set_scale(s / base_size * Vector3.ONE)
+	
+	var new_shape := BoxShape3D.new()
+	new_shape.size = s * Vector3.ONE
+	col_shape.shape = new_shape
+	
+	module_mini_map.set_size(s * Vector3.ONE)
 
 func set_type(tp:Type) -> void:
 	type = tp
-	# @TODO: set sprite frame
+	sprite.frame = get_gift_frame_for_type(tp)
 
 func is_grabbable() -> bool:
 	return state == State.FREE
+
+func is_in_sleigh() -> bool:
+	return state == State.SLEIGH
 
 func change_state(s:State) -> void:
 	var already_set := state == s

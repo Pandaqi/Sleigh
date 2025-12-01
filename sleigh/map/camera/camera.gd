@@ -5,7 +5,7 @@ extends Camera3D
 @export var move_speed := 8.0
 @export var size_margin := 1.0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var bounds := map_data.bounds
 	if not bounds: return
 	

@@ -1,0 +1,18 @@
+keys,en,nl
+GAME_OVER_MESSAGE,"Congratulations! You saved the feast of Saint Nicholas by preparing enough gifts. Your final score is","Gefeliciteerd! Je hebt pakjesavond gered door genoeg pakjes klaar te maken. Je uiteindelijke score is"
+SETTING_GROUP_MACHINES,Machines,Machines
+SETTING_GROUP_MAP,Factory,Fabriek
+SETTING_GRID_SIZE,Factory Size (Multiplier),Fabrieksgrootte
+SETTING_NUM_BELTS,Conveyor Belts,Loopbanden
+SETTING_BASKET_QUANTITY,Basket Quantity,Hoeveelheid manden
+SETTING_GIFT_STANDSTILL,Idle Gift Removal Delay,Vertraging verwijderen stilstaand pakje
+SETTING_GIFT_TARGET,Target Quantity For Winning (Multiplier),Hoeveelheid afgeleverde pakjes voor winst (factor)
+SETTING_AIM_ASSIST,Aim Assistance,Hulp bij richten
+SETTING_MACHINE_ROTATE_SPEED,Machine Rotate Speed (Inactive),Draaisnelheid machines (inactief)
+SETTING_MACHINE_ROTATE_SPEED_HELD,Machine Rotate Speed (Pressed),Draaisnelheid machines (ingedrukt)
+SETTING_MAX_MACHINES_PP,Maximum Machines Per Player (At Once),Maximale hoeveelheid machines bestuurbaar tegelijkertijd
+SETTING_BULLET_SPEED,Bullet Speed,Schietsnelheid pepernoten
+TUT_OBJECTIVE,Shoot the gifts off the conveyor belts and into the right baskets.,Schiet de pakjes van de loopbanden af en in de juiste manden.
+TUT_PRESS,Quick press your button to switch machine (if you control multiple).,Druk kort op je knop om van machine te switchen (als jij er meerdere bestuurt).
+TUT_HOLD,"Hold your button to rotate fast, then release to shoot a spice nut.","Houd je knop ingedrukt om sneller te draaien, en laat dan los om een pepernoot af te vuren."
+TUT_GAMEPLAY,Making fewer mistakes makes you score more points for each correctly delivered gift!,Minder fouten maken zorgt dat je meer punten scoort per juist afgeleverd pakje!

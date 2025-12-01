@@ -10,6 +10,7 @@ enum ContentType
 var pos : Vector2i
 var possible_contents : Dictionary[ContentType,bool] = {}
 var content := ContentType.NONE
+var building := -1
 
 func _init(p:Vector2i) -> void:
 	pos = p
@@ -37,3 +38,6 @@ func forbid_content(tp:ContentType) -> void:
 
 func allow_content(tp:ContentType) -> void:
 	possible_contents[tp] = true
+
+func set_building(idx:int) -> void:
+	building = idx

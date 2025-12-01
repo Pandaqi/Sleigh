@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpwadqkd6fex0"]
+
+[ext_resource type="Script" uid="uid://mw82npxafqk5" path="res://sleigh/sleigh/arrow.gd" id="1_6llm4"]
+
+[node name="Arrow" type="Node2D" unique_id=346282930 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_6llm4")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1063378161]
