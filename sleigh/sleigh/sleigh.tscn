@@ -53,11 +53,15 @@ script = ExtResource("3_bkv40")
 body = NodePath("..")
 arrows = NodePath("Arrows")
 
-[node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629 node_paths=PackedStringArray("arrow_container")]
+[node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629 node_paths=PackedStringArray("arrow_container", "timer")]
 script = ExtResource("5_foh4u")
 arrow_scene = ExtResource("5_sgmq2")
 arrow_container = NodePath(".")
 player_data = ExtResource("6_vjg3j")
+map_data = ExtResource("7_0l66c")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="ModuleMover/Arrows" unique_id=1338193749]
 
 [node name="ModuleMiniMap" type="Node3D" parent="." unique_id=1580184528]
 script = ExtResource("3_0l66c")

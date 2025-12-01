@@ -4,10 +4,20 @@ class_name Arrow
 var vec : Vector3
 var is_pressed := false
 
+var is_rotatable := false
+var is_flippable := false
+var is_flipped := false
+
 @export var sprite : Sprite2D
 
 func _ready() -> void:
 	_on_released()
+
+func make_rotatable() -> void:
+	is_rotatable = true
+
+func make_flippable() -> void:
+	is_flippable = true
 
 func set_vector(v:Vector3) -> void:
 	vec = v

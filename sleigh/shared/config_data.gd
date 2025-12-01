@@ -18,6 +18,10 @@ class_name ConfigData
 @export var sleigh_move_force := 10.0
 @export var sleigh_damping := 2.3
 @export var collision_damage_factor := 50.0
+@export var arrow_flip_interval := 5.0
+@export var arrow_rotate_speed := 2.0
+@export var arrow_flip_speed := 1.0
+@export var arrow_max_sway := 0.75
 
 @export_group("Gifts")
 @export var gift_mass := 0.2

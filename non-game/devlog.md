@@ -90,29 +90,58 @@ But now, in 3D, this doesn't work anymore.
 
 * We need to show an arrow that means "forward" or "backward" ... but especially the backward one is (realistically/normally) hidden behind the sleigh!
 * There's no use adding a "down" key (because gravity takes you down already) ... which would mean the game "only" supports 5 players at most. Because there are only 5 different directions that actually mean something and can be shown clearly.
-* Rotation in 3D sucks :p You can rotate directions around many different axes. Which one do we choose? Which one is easiest to communicate to players?
+* Rotation in 3D sucks :p You can rotate directions around many different axes. Which one do we choose? Which one is easiest to communicate to players? Which one leads to the fewest physics/perspective troubles?
 
 I felt obligated to at least look for a better solution. Change the UI/input scheme for this game so it allows some more freedom. (As I said before: work smarter, not harder/longer.) 
 
+I looked ... and I looked ... and I didn't find anything :p At some point I just have to start doing work again instead of looking for something better.
+
+But allowing myself to think a little longer already revealed some more practical approaches.
+
+* There are 4 directions that are perfectly in line with our side-view perspective: right, down, left, up. 
+  * Those are easy to show clearly, which also makes them the ideal candidate to _rotate_ around the sleigh.
+  * And when they rotate, the "down" direction becomes useful again. Because what is down _now_ ... will not be pointing down anymore in a few seconds. So no player is stuck with a direction that is often useless.
+* This leaves the other 2 directions: FORWARD and BACKWARD.
+  * I decided to simply show _both_ at the front of the sleigh. One with a clear arrow pointing to you, one with an arrow pointing back.
+  * Like the rotating arrows, they simply FLIP on a timer. (So forward is now backward, and vice versa.)
+  * And to _reinforce_ this, those same icons/buttons appear on the front/back of the _minimap_. (This is a very direct way to show what they do exactly.)
+
+Now you can play with 2 players if one person simply has one of the rotating arrows, and the other one of the flipping arrows. With more players, the other directions are simply filled in and you can move more easily/freely.
+
+So, I implemented that, and it was horrible!
+
+There's just no way to control the movement in X and Y direction with _one button_ and rotating arrows. It's just too hard. You have to stay in the air, but you're only pointing up 25% of the time at all! So you just fall down and can barely get up and you die and it's not fun.
+
+What we _really_ need, I realized now, was for buttons to "sway". Like a metronome or pendulum. Go a bit to the left, then a bit to the right, swinging around that up direction. This actually makes flight in 2 directions possible with _one_ button for the up-direction. And because the metronome is quite smooth, the movement becomes surprisingly smooth too.
+
+In practice, this just meant rotating the arrows with a sine wave: `set_rotation(sin(time_variable_that_counts_up_every_frame))`. By tweaking the speed of that, and making sure the up arrow never becomes completely flat (at the extremes), you can actually properly move the sleigh with 2 players now. 
+
+Okay, granted, it's still a silly way to move. And it requires some skill/practice. But that's almost the whole point of a party game like this.
+
+All of this made me wonder though: can we do the other movement (Z-axis; forward/backward) with a "sway" too? It would be more consistent and perhaps more intuitive. Well, we can. We can just make the arrow there go left/right with a sine too. If it's on one half of the sleigh at the moment, you go forward. If it's on the other half, you go backward.
+
+This works, though it's not that big of a change from the old system (of just "flipping" you to the other side every 4--5 seconds). Still, I kept this because it's more consistent and smooth as a whole.
+
+Hmm. I guess this shows, again, that you just can't think your way through problems. Just take 5 minutes to make random ideas and immediately see if they are garbage in practice or not. I would have _never_ come up with the smooth swaying movement we have now just by writing down ideas or thinking about different movement systems.
+
+Anyway, it works great now.
+
+## Finishing The Game
+
+@TODO
 
 
 
 
-
-
-
-
-TODO:
-
-* Figure out the input HOW/BUTTONS
-* Record marketing footage Stoomboten/Pepernotenfabriek?
 
 
 **AI TRANSLATION PROMPT (worked great in Copilot):** I've attached a .csv file with the translations/localization for a video game made with the Godot Engine. It currently contains two columns ("en" for English, "nl" for Dutch). Can you add more columns with the proper translations (from English) in Spanish-Spain, French, German, Portuguese-Brazil and Italian? Please output them in valid CSV-file format (NOT a table), so I can immediately copy it into the file. Please make sure all translations are accurate and concise, taking the video game context into account.
 
-(Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't check those, so let them be.)
+(Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't verify those, so let them be.)
 
 
+
+BUG: On restart, it tries to call something on buttonvisualizer before it's ready yet -> I can fix that by just making all those nodes @export instead of @onready
 
 VISUALS:
 
@@ -122,7 +151,7 @@ VISUALS:
   * Alternatively, **CHRISTMAS BAUBLES** (and progress just means that more of them light up) --> maybe baubles _around_ the entire minimap?
   * Best to neatly collect these around the minimap, to make it look really good and conserve space
   * **REMEMBER** I already created the signals for this in `ui.gd`, all set up
-* Buildings should just randomly generate windows/doors/balconies on them (and CHRISTMAS LIGHTS!)
+* Buildings should just randomly generate windows/doors/balconies on them (and PRETTY CHRISTMAS LIGHTS!)
   * For extra clarity, buildings should just receive their own little accented color scheme (also in minimap)
 * BG should just be a repeating vague texture of a starry sky and stuff
   * HOW = Need to create material, set sampler to repeat, then increase the UV coordinates

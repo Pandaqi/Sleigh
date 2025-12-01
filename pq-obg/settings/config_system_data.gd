@@ -160,6 +160,7 @@ class_name ConfigSystemData
 @export var button_instructions_anchor := ScreenAnchorTool.Anchor.TOP
 @export var button_instructions_icon_size : int = 24
 @export var button_instructions_font_size : int = 14
+@export var button_instructions_panel := false
 
 @export_subgroup("Button Visualizer")
 @export var button_visualizer_scene := preload("res://pq-obg/ui/button_visualizer/button_visualizer.tscn")
