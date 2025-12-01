@@ -1,0 +1,105 @@
+keys,en,nl
+PAUSED_HEADER,Paused,Gepauzeerd
+PAUSED_TEXT,"Add players, or remove players, by pressing one of the buttons indicated.","Voeg spelers toe, of haal spelers weg, door op de aangegeven knop(pen) te klikken."
+BUTTON_NEW_PLAYER,Add new player?,Nieuwe speler toevoegen?
+BUTTON_LOGOUT,Logout = hold your button.,Logout = hold your button.
+BUTTON_LOGOUT_RELOAD,Logout = reload the game.,Uitloggen = herstart het spel.
+BUTTON_LOGOUT_MODE,Logout = Pause -> Hold your button.,Uitloggen = Pauzeer -> Houd je knop ingedrukt
+MENU_PLAY,Play,Spelen
+MENU_SETTINGS,Settings,Instellingen
+MENU_QUIT,Quit,Afsluiten
+GO_RESULTS_GAME,Game Results,Uitslagen (Spel)
+GO_RESULTS_MATCH,Match Results,Uitslagen (Ronde)
+GO_HEADER,Game Over,Spel Afgelopen
+GO_MESSAGE,Press a button to go back to menu or restart with current settings.,Klik op een knop hieronder om terug te gaan naar het menu of opnieuw te spelen met dezelfde instellingen.
+GO_CONTINUE,Continue,Doorgaan
+GO_QUIT,Quit,Afsluiten
+GO_PLAY_AGAIN,Play Again,Speel opnieuw
+TUT_OBJECTIVE_HEADING,Objective,Doel
+TUT_GAME_OVER_HEADING,Game Over,Einde spel
+TUT_BUTTON_PRESS_HEADING,Button Press,Knop loslaten
+TUT_BUTTON_HOLD_HEADING,Button Hold,Knop vasthouden
+TUT_GAMEPLAY_HEADING,Gameplay,Spelregels
+SETTINGS_RESET_ALL,Reset All,Alles herstellen
+SETTINGS_CLOSE,Close,Teruggaan
+ST_BOOL_TRUE,On,Aan
+ST_BOOL_FALSE,Off,Uit
+ST_TAB_CORE,Core,Algemeen
+ST_TAB_THEME,Theme,Visueel
+ST_TAB_GAME,Game,Spel
+ST_GROUP_VIDEO,Video,Video
+ST_GROUP_TUTORIAL,Tutorial,Uitleg
+ST_GROUP_LOGIN_OUT,Login / Logout,Inloggen / uitloggen
+ST_GROUP_ALLOW,Buttons Allowed,Knoppen toegestaan
+ST_GROUP_AUDIO,Audio,Audio
+ST_GROUP_MAIN,Main,Algemeen
+ST_GROUP_COLORS,Colors,Kleuren
+ST_GROUP_UI,Interface,Interface
+ST_GROUP_FONTS,Fonts,Lettertypes
+ST_LANGUAGE_SELECT,Select Language,Selecteer taal
+ST_LANGUAGE_SELECT_TT,Instantly changes the language for the entire game.,Verandert direct de taal voor het hele spel.
+ST_VOLUME_GAME,Volume Game,Volume spel
+ST_VOLUME_GAME_TT,Changes the volume of all game sounds (mostly quick sound effects).,Verandert het volume van alle geluiden in het spel (voornamelijk geluidseffecten).
+ST_VOLUME_BACKGROUND,Volume Background,Volume achtergrondmuziek
+ST_VOLUME_BACKGROUND_TT,Changes the volume of the background track that always plays.,Verandert het volume van de achtergrondmuziek die altijd speelt.
+ST_VOLUME_UI,Volume Interface,Volume Interface
+ST_VOLUME_UI_TT,Changes the volume of the interface click/change sounds.,Verandert het volume van de klikgeluiden in het menu.
+ST_ALLOW_MOUSE,Mouse,Muis
+ST_ALLOW_MOUSE_TT,Whether mouse buttons are valid buttons for players.,Of muisknoppen mogen worden gebruikt om spelers te besturen.
+ST_ALLOW_KEYBOARD,Keyboard,Toetsenbord
+ST_ALLOW_KEYBOARD_TT,Whether keyboard buttons are valid buttons for players.,Of toetsenbordknoppen mogen worden gebruikt om spelers te besturen.
+ST_ALLOW_GAMEPAD,Gamepads,Controller
+ST_ALLOW_GAMEPAD_TT,Whether controller buttons are valid buttons for players.,Of knoppen van een externe controller mogen worden gebruikt om spelers te besturen.
+ST_ALLOW_TOUCH,Touchscreen,Touchscreen
+ST_ALLOW_TOUCH_TT,"If enabled, players get a special area on the screen they can touch as their button.",Als aangezet krijgen spelers een speciaal gebiedje op het scherm dat ze met hun vinger kunnen aanraken als hun knop.
+ST_MAX_PLAYERS,Maximum player count,Maximaal aantal spelers
+ST_MAX_PLAYERS_TT,Once reached no more players can login.,Wanneer deze limiet is bereikt kunnen geen nieuwe spelers meer worden toegevoegd.
+ST_LOGOUT_HOLD_DUR,Logout hold duration,Duratie indrukken voor uitloggen
+ST_LOGOUT_HOLD_DUR_TT,"If you set logout mode to hold, this determines how long you must hold your button to log out.","Als je uitlogmodus is gezet naar ingedrukt houden, bepaalt dit hoe lang je dit moet doen om jezelf te verwijderen."
+ST_ALLOW_DYN_LOGOUT,Allow removing players while playing?,Mogen spelers uitloggen tijdens het spelen?
+ST_ALLOW_DYN_LOGOUT_TT,Allows adding a player when not paused.,Staat toe dat spelers erbij komen terwijl het spel niet is gepauzeerd.
+ST_ALLOW_DYN_LOGIN,Allow adding players while playing?,Mogen spelers inloggen tijdens het spelen?
+ST_ALLOW_DYN_LOGIN_TT,Allows removing a player when not paused.,Staat toe dat spelers het spel verlaten terwijl het spel niet is gepauzeerd.
+ST_INPUT_LOGIN_CLICK,Login with instruction click,Spelers toevoegen door instructie klikken
+ST_INPUT_LOGIN_CLICK_TT,Also allows adding a player by simply clicking the instruction that tells you what to press.,Staat toe dat je ook spelers kan inloggen door simpelweg op de instructie te klikken die vertelt waarop je moet drukken.
+ST_FULLSCREEN,Fullscreen,Volledig scherm
+ST_FULLSCREEN_TT,Makes the game fullscreen (instead of windowed).,Laat het spel het volledige scherm in beslag nemen.
+ST_TUT_ENABLED,Enable Tutorial,Laat uitlegplaatjes zien
+ST_TUT_ENABLED_TT,Show simple images at the start to explain how to play the game.,Laat simpele uitlegplaatjes zien aan het begin van het spel zodat je weet hoe je moet spelen.
+ST_TUT_SCALE,Tutorial Image Scale,Grootte uitlegplaatjes
+ST_TUT_SCALE_TT,How large the images should be that explain how to play at the start.,Hoe groot de plaatjes moeten zijn die uitleggen hoe je het spel speelt.
+ST_TUT_FONT_SIZE,Tutorial Font Size,Uitleg tekstgrootte
+ST_TUT_FONT_SIZE_TT,"If the tutorial images are text-based, this decides how large that text is.","Als de uitleg via tekst gedaan wordt, dan bepaald dit de grootte daarvan."
+ST_TUT_DELAY,Delay between tutorial images,Vertraging tonen uitlegplaatjes
+ST_TUT_DELAY_TT,How much time the system waits before showing the next explanation image (0 = show all immediately).,Hoe lang het systeem wacht voordat het doorgaat naar het volgende uitlegplaatje (0 = laat allemaal direct zien).
+ST_TUT_DELAY_REMOVE,Delay before removing tutorial images,Vertraging verwijderen uitlegplaatjes
+ST_TUT_DELAY_REMOVE_TT,How much time the system waits before removing an existing explanation image (0 = stays forever).,Hoe lang het systeem wacht voordat het een bestaand uitlegplaatje weer vervaagd (0 = blijft altijd).
+ST_BUTTON_VIS_SCALE,Button Hint Scale,Grootte speelknoppen
+ST_BUTTON_VIS_SCALE_TT,How large instructions should be for which button to press.,Hoe groot de knoppen moeten zijn die je vertellen wat je als speler moet indrukken.
+ST_BUTTON_INSTRUC_SIZE_ICON,Instructions Icon Size,Grootte van icoontje in knop-instructies
+ST_BUTTON_INSTRUC_SIZE_ICON_TT,Changes the size of the icon in the persistent instructions for how to login/logout players.,Verandert de grootte van het icoontje in de (altijd aanwezige) instructies voor hoe je spelers toevoegt/weghaalt.
+ST_BUTTON_INSTRUC_SIZE_FONT,Instructions Font Size,Grootte van lettertype in knop-instructies
+ST_BUTTON_INSTRUC_SIZE_FONT_TT,Changes the size of the font in the persistent instructions for how to login/logout players.,Verandert de grootte van de tekst in de (altijd aanwezige) instructies voor hoe je spelers toevoegt/weghaalt.
+ST_BORDER_RADIUS,Corner Roundness,Ronding van hoeken
+ST_BORDER_RADIUS_TT,Sets the roundness of the corners of rectangular menu panels.,Zet de ronding van de hoeken van de rechthoekige menupanelen.
+ST_BORDER_MARGIN,Text Margin,Tekstmarge
+ST_BORDER_MARGIN_TT,Amount of whitespace between text and border around it.,Witruimte tussen text en vierkant eromheen.
+ST_FONT_SIZE_LABEL,Font Size Regular,Tekstgrootte normale tekst
+ST_FONT_SIZE_LABEL_TT,Changes the font size on all regular text and labels.,Verandert de lettertypegrootte op alle regulier tekst en labels.
+ST_FONT_SIZE_BUTTON,Font Size Buttons,Tekstgrootte knoppen
+ST_FONT_SIZE_BUTTON_TT,Changes the font size on menu buttons and some special headings.,Verandert de lettertypegrootte op menuknoppen en enkele speciale kopjes.
+ST_FONTS_USE_SYSTEM,Use Neutral Fonts,Gebruik neutrale lettertypes
+ST_FONTS_USE_SYSTEM_TT,"In case the fonts create issues, or you find them hard to read, this falls back to neutral system fonts.","Gebruik neutrale lettertypes die elk systeem heeft, als de huidige lettertypes problemen veroorzaken of slecht te lezen zijn."
+ST_COLOR_AUTO_GENERATE,Auto Generate Color Scheme,Genereer automatisch kleurenschema
+ST_COLOR_AUTO_GENERATE_TT,"If enabled, it automatically creates all the colors from the single Main Color","Als aangezet, wordt automatisch een kleurenschema gemaakt op basis van alleen de Accentkleur."
+ST_COLOR_MAIN,"Main Color (for Color Scheme)","Accentkleur (voor kleurenschema)"
+ST_COLOR_MAIN_TT,Only used if Auto Generate Color Scheme is on.,Alleen gebruikt als automatisch kleurenschema aanstaat.
+ST_COLOR_TEXT,Text Color,Tekstkleur
+ST_COLOR_BORDER,"Border Color (Panels)","Randkleur (Panelen)"
+ST_COLOR_PANEL_BG,"Background Color (Panels)","Achtergrondkleur (Panelen)"
+ST_COLOR_NORMAL_BG,Normal Background Color,Normale achtergrondkleur
+ST_COLOR_NORMAL_TEXT,Normal Text Color,Normale tekstkleur
+ST_COLOR_FOCUS_BG,Focus Background Color,Focus/Selectie achtergrondkleur
+ST_COLOR_FOCUS_TEXT,Focus Text Color,Focus/Selectie tekstkleur
+ST_COLOR_HOVER_BG,Hover Background Color,Muis-over achtergrondkleur
+ST_COLOR_HOVER_TEXT,Hover Text Color,Muis-over tekstkleur

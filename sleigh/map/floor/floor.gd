@@ -27,7 +27,7 @@ func damage_sleigh_if_here(delta: float) -> void:
 	var sleigh_is_here := area.get_overlapping_bodies().find(map_data.sleigh) != -1
 	if not sleigh_is_here: return
 	
-	# @TODO: if not Global.config.floor_is_lava: return
+	if not Global.config.floor_is_lava: return
 	
 	var damage := damage_per_second * delta
 	map_data.sleigh.module_health.change(-damage)

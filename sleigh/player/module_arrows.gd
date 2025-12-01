@@ -19,6 +19,6 @@ func _on_pressed() -> void:
 	for arrow in arrows:
 		arrow._on_pressed()
 
-func _on_released() -> void:
+func _on_released(_dur:float) -> void:
 	for arrow in arrows:
 		arrow._on_released()

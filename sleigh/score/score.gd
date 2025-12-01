@@ -7,11 +7,6 @@ var time_started := 0.0
 var time_last_delivery := 0.0
 var num_collisions_since_last_delivery := 0
 
-const MAX_TIME_BETWEEN_DELIVERIES := 10.0
-const TIME_BONUS := 3.0
-const PENALTY_PER_COLLISION := 2.0 # divides by this
-const SCORE_PER_GIFT := 10.0
-
 @export var map_data : MapData
 @export var ui : UI
 
@@ -24,18 +19,18 @@ func _ready() -> void:
 	sleigh.module_delivery.delivered.connect(_on_gifts_delivered)
 	sleigh.module_collider.collided.connect(_on_sleigh_collided)
 
-func _on_sleigh_collided(b:Building) -> void:
+func _on_sleigh_collided(_b:Building) -> void:
 	num_collisions_since_last_delivery += 1
 
-func _on_gifts_delivered(gifts:Array[Gift], b:Building) -> void:
-	var score_change := SCORE_PER_GIFT * gifts.size()
-	score_change /= PENALTY_PER_COLLISION * num_collisions_since_last_delivery
+func _on_gifts_delivered(gifts:Array[Gift], _b:Building) -> void:
+	var score_change := Global.config.score_per_gift * gifts.size()
+	score_change /= Global.config.score_penalty_per_collision * num_collisions_since_last_delivery
 	
 	var time_since_last_delivery := (Time.get_ticks_msec() - time_last_delivery) / 1000.0
-	var time_ratio : float = clamp(time_since_last_delivery / MAX_TIME_BETWEEN_DELIVERIES, 0.0, 1.0)
-	score_change *= lerp(1.0, TIME_BONUS, time_ratio)
+	var time_ratio := clampf(time_since_last_delivery / Global.config.max_time_between_deliveries, 0.0, 1.0)
+	score_change *= lerpf(1.0, Global.config.score_time_bonus, time_ratio)
 	
-	score_change = ceil(max(score_change, 1))
+	score_change = ceilf(maxf(score_change, 1))
 	
 	change_score(score_change)
 	
@@ -43,5 +38,5 @@ func _on_gifts_delivered(gifts:Array[Gift], b:Building) -> void:
 	time_last_delivery = Time.get_ticks_msec()
 
 func change_score(ds:float) -> void:
-	score = clamp(score + ds, 0.0, INF)
+	score = clampf(score + ds, 0.0, INF)
 	changed.emit(score)

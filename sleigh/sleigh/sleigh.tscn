@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dokcui25j7aay"]
+[gd_scene load_steps=17 format=3 uid="uid://dokcui25j7aay"]
 
 [ext_resource type="Script" uid="uid://cpp6ig46xue1p" path="res://sleigh/sleigh/sleigh.gd" id="1_wuwth"]
 [ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_hm7cj"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://b6ii1tr8f1usd" path="res://sleigh/sleigh/module_delivery.gd" id="4_bkv40"]
 [ext_resource type="Script" uid="uid://c4o6w2b3rqn4g" path="res://sleigh/sleigh/module_collider.gd" id="5_7aq07"]
 [ext_resource type="Script" uid="uid://cy30dom8p0ejr" path="res://sleigh/sleigh/arrows/arrows.gd" id="5_foh4u"]
+[ext_resource type="PackedScene" uid="uid://dpwadqkd6fex0" path="res://sleigh/sleigh/arrows/arrow.tscn" id="5_sgmq2"]
 [ext_resource type="Script" uid="uid://yn0eo0wfr3tl" path="res://sleigh/sleigh/module_gifts.gd" id="6_foh4u"]
+[ext_resource type="Resource" uid="uid://cqn477x4eqflj" path="res://pq-obg/players/player_data.tres" id="6_vjg3j"]
 [ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="7_0l66c"]
 [ext_resource type="Script" uid="uid://weimd32n6iap" path="res://sleigh/sleigh/module_health.gd" id="7_hm7cj"]
 [ext_resource type="Script" uid="uid://b0rcvgf6equv2" path="res://sleigh/sleigh/module_grabber.gd" id="7_sgmq2"]
@@ -46,12 +48,16 @@ shape = SubResource("CapsuleShape3D_rt3xt")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 texture = ExtResource("2_hm7cj")
 
-[node name="ModuleMover" type="Node3D" parent="." unique_id=1535471441 node_paths=PackedStringArray("body")]
+[node name="ModuleMover" type="Node3D" parent="." unique_id=1535471441 node_paths=PackedStringArray("body", "arrows")]
 script = ExtResource("3_bkv40")
 body = NodePath("..")
+arrows = NodePath("Arrows")
 
-[node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629]
+[node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629 node_paths=PackedStringArray("arrow_container")]
 script = ExtResource("5_foh4u")
+arrow_scene = ExtResource("5_sgmq2")
+arrow_container = NodePath(".")
+player_data = ExtResource("6_vjg3j")
 
 [node name="ModuleMiniMap" type="Node3D" parent="." unique_id=1580184528]
 script = ExtResource("3_0l66c")
@@ -73,6 +79,8 @@ map_data = ExtResource("7_0l66c")
 [node name="ModuleHealth" type="Node3D" parent="." unique_id=296194529 node_paths=PackedStringArray("body")]
 script = ExtResource("7_hm7cj")
 body = NodePath("..")
+health = null
+max_health = null
 
 [node name="ModuleGrabber" type="Node3D" parent="." unique_id=2079427754 node_paths=PackedStringArray("sleigh", "area", "module_gifts")]
 script = ExtResource("7_sgmq2")

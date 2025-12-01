@@ -2,16 +2,17 @@ extends Node3D
 class_name ModuleMover
 
 @export var body : RigidBody3D
-@export var move_force := 10.0 # @TODO: Global.config.sleigh_move_force
-@export var lift_force := 25.0 # @TODO: Global.config.sleigh_lift_force
 @export var debug_input := true
 
 @export var arrows : Arrows
 var ui_container : UI
 
+var move_force := Global.config.sleigh_move_force
+var lift_force := Global.config.sleigh_lift_force
+
 func _ready() -> void:
-	body.mass = 1.0 # @TODO: Global.config.sleigh_mass
-	body.damping = 2.3 # @TODO: Global.config.sleigh_damping
+	body.mass = Global.config.sleigh_mass
+	body.linear_damp = Global.config.sleigh_damping
 	arrows.create(ui_container)
 
 func _physics_process(_delta: float) -> void:

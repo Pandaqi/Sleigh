@@ -123,4 +123,4 @@ func get_valid_cells_for(square_size:Vector3, type:GridCell.ContentType) -> Arra
 	return arr
 			
 func get_front_back_ratio(pos:Vector2i) -> float:
-	return clamp(1.0 - pos.y / float(size.y), 0.0, 1.0)
+	return clampf(1.0 - pos.y / float(size.y), 0.0, 1.0)

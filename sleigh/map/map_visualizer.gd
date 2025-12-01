@@ -45,7 +45,7 @@ func visualize(g:MapGenerator) -> void:
 		map_data.buildings.append(b)
 	
 	# the gifts
-	var gift_size := 0.5 # @TODO: Global.config.gift_size
+	var gift_size := Global.config.gift_size
 	for i in range(g.count_gifts()):
 		var gift : Gift = gift_scene.instantiate()
 		var raw_pos := g.gift_positions[i] - map_half_size

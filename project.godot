@@ -15,6 +15,10 @@ run/main_scene="uid://dhexc5kxv8rjt"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://cjblsc7fxuoqg"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -39,7 +43,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation")
+locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation")
 
 [physics]
 

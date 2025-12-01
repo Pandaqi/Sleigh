@@ -20,7 +20,7 @@ func collect_gift(body:Gift) -> void:
 	
 	# track that we have it
 	module_gifts.collect_gift(body)
-	body.change_state(Gift.State.SLEIGH)
+	body.change_state(Gift.Condition.SLEIGH)
 	
 	# physically stick it to us
 	var joint := PinJoint3D.new()

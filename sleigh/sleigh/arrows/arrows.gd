@@ -9,14 +9,14 @@ var arrow_dirs := [Vector3.LEFT, Vector3.RIGHT, Vector3.FORWARD, Vector3.BACK, V
 @export var player_data : PlayerData
 
 func _ready() -> void:
-	pass
-	# @TODO: Global.input.buttons_changed.connect(_on_buttons_changed)
+	Global.input.buttons_changed.connect(_on_buttons_changed)
 
 func create(ui_container:CanvasLayer) -> void:
 	for dir in arrow_dirs:
 		var a : Arrow = arrow_scene.instantiate()
 		a.set_vector(dir)
 		arrow_container.add_child(a)
+	arrow_container.get_parent().remove_child(arrow_container)
 	ui_container.add_child(arrow_container)
 
 func get_vector() -> Vector3:
@@ -30,13 +30,13 @@ func _on_buttons_changed() -> void:
 	var num_players := player_data.count()
 	if num_players <= 0: return
 	
-	var players := player_data.players.duplicate()
+	var players : Array[PlayerSystem] = player_data.players.duplicate()
 	players.shuffle()
 	
 	for p in players:
-		p.module_arrows.clear()
+		(p as Player).module_arrows.clear()
 	
 	for i in range(arrows.size()):
 		var arrow := arrows[i]
 		var player := players[i % num_players]
-		p.module_arrows.add(arrow)
+		(player as Player).module_arrows.add(arrow)

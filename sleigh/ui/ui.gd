@@ -3,6 +3,7 @@ class_name UI
 
 @export var score : Score
 @export var map_data : MapData
+@export var game_over_menu : GameOverMenu
 
 func _ready() -> void:
 	score.changed.connect(_on_score_changed)
@@ -26,6 +27,7 @@ func _on_score_changed(s:float) -> void:
 
 func goto_game_over(good := false) -> void:
 	print("GAME OVER! Good? ", good)
-	map_data.score = int(ceil(score.score))
-	map_data.time_played = int(ceil((Time.get_ticks_msec() - score.time_started) / 1000.0))
-	# @TODO: activate the standard game over menu, reads those map_data entries to display
+	map_data.game_over_good = good
+	map_data.score = ceili(score.score + Global.config.score_bonus_win)
+	map_data.time_played = ceili((Time.get_ticks_msec() - score.time_started) / 1000.0)
+	game_over_menu.activate()

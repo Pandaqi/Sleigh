@@ -23,7 +23,7 @@ func _draw() -> void:
 	var map_scale := size_pixels / Vector2(map_size.x, map_size.z)
 	
 	# BG
-	var border_radius := 16.0
+	var border_radius := 16
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
 	style_box.bg_color = Color.WHITE
@@ -45,8 +45,8 @@ func _draw() -> void:
 func draw_asset_texture(m:ModuleMiniMap, map_scale:Vector2, type: Gift.Type) -> void:
 	var rect := m.get_rect(map_scale)
 	var scale_down_factor := 0.8
-	var min_size : float = min(rect.size.x, rect.size.y)*scale_down_factor
-	min_size = clamp(min_size, MIN_ELEMENT_SIZE, MAX_ELEMENT_SIZE)
+	var min_size := minf(rect.size.x, rect.size.y)*scale_down_factor
+	min_size = clampf(min_size, MIN_ELEMENT_SIZE, MAX_ELEMENT_SIZE)
 	var square_size : Vector2 = min_size*Vector2.ONE
 	var square_pos : Vector2 = rect.position + 0.5*rect.size - 0.5*square_size
 	var rect_square := Rect2(square_pos, square_size)
@@ -55,7 +55,7 @@ func draw_asset_texture(m:ModuleMiniMap, map_scale:Vector2, type: Gift.Type) -> 
 	draw_texture_rect_region(texture_assets, rect_square, rect_source)
 
 func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false) -> void:
-	var border_radius := 8.0
+	var border_radius := 8
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
 	style_box.bg_color = m.get_color()
@@ -77,7 +77,7 @@ func check_sleigh_behind_us(delta: float) -> void:
 	# @NOTE: y is flipped because 2D y goes _down_ and 3D y goes _up_
 	var is_behind := sleigh_pos.x > top_left_world.x and sleigh_pos.x < bottom_right_world.x and sleigh_pos.y < top_left_world.y and sleigh_pos.y > bottom_right_world.y
 	var target_alpha := 0.33 if is_behind else 1.0
-	modulate.a = lerp(modulate.a, target_alpha, delta*10.0)
+	modulate.a = lerpf(modulate.a, target_alpha, delta*10.0)
 
 func _on_size_changed() -> void:
 	var vp := get_viewport().get_visible_rect().size

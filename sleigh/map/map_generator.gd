@@ -1,17 +1,13 @@
 extends Node3D
 class_name MapGenerator
 
-const MAP_SIZE := Vector2i(20, 10)
-const NUM_BUILDINGS := 10
-
-const BUILDING_HEIGHT_MIN := 1.0
-const BUILDING_HEIGHT_MAX := 8.0
-
+var map_size : Vector2i
+var num_buildings := Global.config.num_buildings
 var building_positions : Array[Vector2i] = []
 var building_sizes : Array[Vector3] = []
 var building_types : Array[Gift.Type] = []
 
-const NUM_GIFTS_FACTOR := 1.0 # ~num_buildings
+var num_gifts_factor := Global.config.num_gifts_factor
 var gift_positions : Array[Vector3] = []
 var gift_types : Array[Gift.Type] = []
 
@@ -19,15 +15,17 @@ var num_attempts := 0
 var failed := false
 var grid : MapGrid
 
+
 func generate() -> void:
 	num_attempts += 1
 	failed = false
 	
+	map_size = Vector2i(Global.config.map_size_base * Global.config.map_size_factor)
+	
 	grid = MapGrid.new()
-	grid.size = MAP_SIZE
+	grid.size = map_size
 	grid.create()
 	
-	var num_buildings := NUM_BUILDINGS
 	var possible_types = Gift.Type.values()
 	if num_buildings < possible_types.size():
 		possible_types = possible_types.slice(0, num_buildings)
@@ -67,7 +65,7 @@ func generate() -> void:
 		for cell in cells_in_front:
 			cell.forbid_content(GridCell.ContentType.BUILDING)
 	
-	var num_gifts := NUM_BUILDINGS * NUM_GIFTS_FACTOR
+	var num_gifts := num_buildings * num_gifts_factor
 	var all_types = []
 	while all_types.size() < num_gifts:
 		all_types += possible_types
@@ -87,13 +85,13 @@ func get_random_height() -> float:
 	return get_height_from_ratio(randf())
 
 func get_size() -> Vector2i:
-	return MAP_SIZE
+	return map_size
 
 func get_bounds() -> Vector3:
-	return Vector3(MAP_SIZE.x, BUILDING_HEIGHT_MAX, MAP_SIZE.y)
+	return Vector3(map_size.x, Global.config.building_height_max, map_size.y)
 
 func get_height_from_ratio(ratio:float) -> float:
-	return ceil(lerp(BUILDING_HEIGHT_MIN, BUILDING_HEIGHT_MAX, ratio))
+	return ceilf(lerpf(Global.config.building_height_min, Global.config.building_height_max, ratio))
 
 func get_random_building_size() -> Vector3:
 	var x : float = randi_range(1,3)

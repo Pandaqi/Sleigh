@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl6irfet6cfe2"]
+
+[ext_resource type="Script" uid="uid://hohncdl36xuk" path="res://sleigh/player/player.gd" id="1_teowl"]
+[ext_resource type="Script" uid="uid://cbh8pskekcq4r" path="res://pq-obg/input/module_input.gd" id="2_404ue"]
+[ext_resource type="Script" uid="uid://d4chto4chxfgq" path="res://sleigh/player/module_arrows.gd" id="3_otgld"]
+
+[node name="Player" type="Node" unique_id=1978620066 node_paths=PackedStringArray("module_arrows", "module_input")]
+script = ExtResource("1_teowl")
+module_arrows = NodePath("ModuleArrows")
+module_input = NodePath("ModuleInput")
+
+[node name="ModuleInput" type="Node" parent="." unique_id=103320983]
+script = ExtResource("2_404ue")
+
+[node name="ModuleArrows" type="Node" parent="." unique_id=2100384139 node_paths=PackedStringArray("module_input")]
+script = ExtResource("3_otgld")
+module_input = NodePath("../ModuleInput")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjblsc7fxuoqg"]
+
+[ext_resource type="Script" uid="uid://1lblipea6y8g" path="res://pq-obg/state/global.gd" id="1_iowkg"]
+[ext_resource type="Resource" uid="uid://tl2xaotm7en8" path="res://pepernotenfabriek/shared/config_data.tres" id="2_ljvun"]
+[ext_resource type="Resource" uid="uid://dvtq7hggu4kjk" path="res://pepernotenfabriek/shared/config_system_data.tres" id="3_n0ndt"]
+
+[node name="Global" type="Node" unique_id=1281461060]
+script = ExtResource("1_iowkg")
+config = ExtResource("2_ljvun")
+config_system = ExtResource("3_n0ndt")

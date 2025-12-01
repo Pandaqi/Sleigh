@@ -9,7 +9,7 @@ enum Type
 	TRIANGLE
 }
 
-enum State
+enum Condition
 {
 	NONE,
 	FREE,
@@ -17,7 +17,7 @@ enum State
 }
 
 var type := Type.SQUARE
-var state := State.NONE
+var state := Condition.NONE
 
 @export var col_shape : CollisionShape3D
 @export var sprite : Sprite3D
@@ -33,8 +33,8 @@ static func get_gift_frame_for_type(tp:Type) -> int:
 	return -1
 
 func _ready() -> void:
-	mass = 0.2 # @TODO: Global.config.gift_mass
-	change_state(State.FREE)
+	mass = Global.config.gift_mass
+	change_state(Condition.FREE)
 
 func set_size(s:float) -> void:
 	var base_size := 256.0 / 100.0
@@ -51,17 +51,17 @@ func set_type(tp:Type) -> void:
 	sprite.frame = get_gift_frame_for_type(tp)
 
 func is_grabbable() -> bool:
-	return state == State.FREE
+	return state == Condition.FREE
 
 func is_in_sleigh() -> bool:
-	return state == State.SLEIGH
+	return state == Condition.SLEIGH
 
-func change_state(s:State) -> void:
+func change_state(s:Condition) -> void:
 	var already_set := state == s
 	if already_set: return
 	
 	state = s
-	freeze = (state == State.FREE)
+	freeze = (state == Condition.FREE)
 
 func kill(good := false) -> void:
 	# @TODO: animate/tween/react more

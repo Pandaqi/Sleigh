@@ -10,12 +10,12 @@ signal depleted()
 
 func _on_collided(_b:Building) -> void:
 	# @TODO: do something to the building?
-	var damage_factor := 1.0 / 50.0 # @TODO: Global.config.collision_damage_factor
+	var damage_factor := 1.0 / Global.config.collision_damage_factor
 	var damage := body.linear_velocity.length() * damage_factor
 	change(-damage)
 
 func change(dh:float) -> void:
-	health = clamp(health + dh, 0.0, max_health)
+	health = clampf(health + dh, 0.0, max_health)
 	changed.emit(health)
 	
 	if health <= 0:

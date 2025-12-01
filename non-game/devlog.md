@@ -105,11 +105,14 @@ I felt obligated to at least look for a better solution. Change the UI/input sch
 TODO:
 
 * Figure out the input HOW/BUTTONS
-* Add OBG system + necessary improvements
-  * Already pick fonts too
-  * Already fill+read the custom config variables
 * Record marketing footage Stoomboten/Pepernotenfabriek?
-* TEST AI translations for OBG.csv file directly?
+
+
+**AI TRANSLATION PROMPT (worked great in Copilot):** I've attached a .csv file with the translations/localization for a video game made with the Godot Engine. It currently contains two columns ("en" for English, "nl" for Dutch). Can you add more columns with the proper translations (from English) in Spanish-Spain, French, German, Portuguese-Brazil and Italian? Please output them in valid CSV-file format (NOT a table), so I can immediately copy it into the file. Please make sure all translations are accurate and concise, taking the video game context into account.
+
+(Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't check those, so let them be.)
+
+
 
 VISUALS:
 
