@@ -2,7 +2,7 @@ extends Node2D
 class_name Arrows
 
 var arrows : Array[Arrow]
-var arrow_dirs := [Vector3.RIGHT, Vector3.DOWN, Vector3.LEFT, Vector3.UP, Vector3.FORWARD, Vector3.BACK]
+var arrow_dirs := [Vector3.RIGHT, Vector3(1,-1,0), Vector3.DOWN, Vector3(-1,-1,0), Vector3.LEFT, Vector3(-1,1,0), Vector3.UP, Vector3(1,1,0), Vector3.FORWARD, Vector3.BACK]
 
 @export var arrow_scene : PackedScene
 @export var arrow_container : Node2D
@@ -32,12 +32,14 @@ func create(ui_container:CanvasLayer) -> void:
 		a.set_vector(dir)
 		arrow_container.add_child(a)
 	
-	for i in range(4):
-		arrows[i].make_rotatable()
-		arrows[i].set_rotation(i * 0.5 * PI)
+	var counter := 0
+	for arrow in get_rotating_arrows():
+		arrow.make_rotatable()
+		arrow.set_rotation(counter * 0.25 * PI)
+		counter += 1
 	
-	for i in range(4,6):
-		arrows[i].make_flippable()
+	for arrow in get_flipping_arrows():
+		arrow.make_flippable()
 	
 	arrow_container.get_parent().remove_child(arrow_container)
 	ui_container.add_child(arrow_container)
@@ -63,23 +65,48 @@ func _on_buttons_changed() -> void:
 	for p in players:
 		(p as Player).module_arrows.clear()
 	
-	var rot_arrows := get_rotating_arrows()
-	var fl_arrows := get_flipping_arrows()
-	var arrows_to_assign := arrows
-	
-	# up, front/back
-	if num_players <= 2:
-		arrows_to_assign = [rot_arrows[3], fl_arrows[0]]
-	
-	# up, right, left, front/back
-	if num_players > 2 and num_players <= 4:
-		arrows_to_assign = [rot_arrows[3], rot_arrows[0], rot_arrows[2], fl_arrows[0]]
+	var arrows_to_assign := determine_arrows_to_assign()
 	
 	var counter := 0
 	for arrow in arrows_to_assign:
 		var player := players[counter % num_players]
 		counter += 1
 		(player as Player).module_arrows.add(arrow)
+	
+	# only show those actually used
+	for arrow in arrows:
+		arrow.set_visible(arrows_to_assign.has(arrow))
+
+func determine_arrows_to_assign() -> Array[Arrow]:
+	var num_players := player_data.count()
+	
+	var rot_arrows := get_rotating_arrows()
+	var fl_arrows := get_flipping_arrows()
+	
+	## 3D MODE ##
+	if Global.config.in_mode_3d():
+		# up, front/back
+		if num_players <= 2:
+			return [rot_arrows[6], fl_arrows[0]]
+		
+		# up, right, left, front/back
+		if num_players <= 4:
+			return [rot_arrows[6], rot_arrows[0], rot_arrows[4], fl_arrows[0]]
+		
+		return arrows
+	
+	## 2D MODE ##
+	# No flipping arrows; more diagonal options
+	if Global.config.in_mode_2d():
+		if num_players <= 2:
+			return [rot_arrows[6], rot_arrows[0]]
+		
+		if num_players <= 4:
+			return [rot_arrows[0], rot_arrows[2], rot_arrows[4], rot_arrows[6]]
+		
+		return rot_arrows
+	
+	return arrows
 
 func arrow_dir_to_2d(dir:Vector3) -> Vector2:
 	var has_z_component := absf(dir.z) > 0.03
@@ -92,16 +119,22 @@ func _physics_process(delta: float) -> void:
 	flip_arrows(delta)
 
 func get_rotating_arrows() -> Array[Arrow]:
-	return arrows.slice(0,4)
+	return arrows.slice(0,8)
 
 func get_flipping_arrows() -> Array[Arrow]:
-	return arrows.slice(4,6)
+	return arrows.slice(8,10)
 
 func rotate_arrows(delta: float) -> void:
-	var speed := delta * Global.config.arrow_rotate_speed
+	# rotation is simpler but only possible in 2D
+	var should_rotate := Global.config.in_mode_2d() and Global.config.arrow_rotate_on_mode_2d
+	if should_rotate:
+		rotate(delta * Global.config.arrow_rotate_speed)
+		return
+	
+	# "swaying" is the default
+	var speed := delta * Global.config.arrow_sway_speed
 	rotation_time_tracker += speed
 	set_rotation(Global.config.arrow_max_sway * sin(rotation_time_tracker) * 0.5 * PI)
-	# rotate(speed)
 
 func flip_arrows(delta:float) -> void:
 	var speed := delta * Global.config.arrow_flip_speed
@@ -134,5 +167,7 @@ func keep_arrows_on_sleigh() -> void:
 	
 	var offset_on_sleigh := 32.0 # @TODO: how to calculate this automatically?
 	for arrow in get_flipping_arrows():
-		arrow.global_position = pos_2d + get_arrow_flip_ratio() * arrow_dir_to_2d(arrow.vec) * offset_on_sleigh
-		arrow.rotation = -rotation # compensate for rotation of container to stay upright
+		var arrow_vec_conv := get_arrow_flip_ratio() * arrow_dir_to_2d(arrow.vec)
+		arrow.global_position = pos_2d + arrow_vec_conv * offset_on_sleigh
+		var target_rotation := 0.5*PI if arrow_vec_conv.x > 0 else -0.5*PI
+		arrow.rotation = target_rotation - rotation # compensate for rotation of container to stay upright

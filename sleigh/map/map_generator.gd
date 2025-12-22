@@ -22,6 +22,12 @@ func generate() -> void:
 	
 	map_size = Vector2i(Global.config.map_size_base * Global.config.map_size_factor)
 	
+	# in 2D, the city is flat and we should ensure all buildings are just on one line
+	if Global.config.in_mode_2d():
+		map_size.x = roundi(map_size.x * Global.config.map_size_scale_2d)
+		map_size.y = 1
+		num_buildings = mini(num_buildings, map_size.x)
+	
 	grid = MapGrid.new()
 	grid.size = map_size
 	grid.create()
@@ -44,10 +50,15 @@ func generate() -> void:
 			size = Vector3.ONE
 			positions = grid.get_valid_cells_for(size, GridCell.ContentType.BUILDING)
 		
+		# if still no space, we're done here
+		if positions.size() <= 0: break
+		
 		var pos : Vector2i = positions.pick_random().pos
 		
 		# now make the buildings higher at the back (generally)
-		size.y = get_height_from_ratio(grid.get_front_back_ratio(pos))
+		var height := get_height_from_ratio(grid.get_front_back_ratio(pos))
+		if Global.config.in_mode_2d(): height = get_random_height()
+		size.y = height
 		
 		# add all this to the array
 		building_positions.append(pos)
@@ -58,6 +69,7 @@ func generate() -> void:
 		var all_cells_filled := grid.get_square_around(pos, Vector2i(size.x, size.z))
 		for cell in all_cells_filled:
 			cell.set_content(GridCell.ContentType.BUILDING)
+			cell.set_height(size.y)
 			cell.set_building(i)
 		
 		# forbid anything in straight line in front of us
@@ -72,12 +84,22 @@ func generate() -> void:
 	all_types.shuffle()
 	
 	var positions_possible_gifts := grid.get_all_cells_for_content(GridCell.ContentType.GIFT)
+	
+	# in 2D mode, we just allow gifts anywhere, and place them ABOVE buildings if needed => looks better + otherwise we have too little space
+	if Global.config.in_mode_2d():
+		positions_possible_gifts = grid.get_cells()
+	
 	positions_possible_gifts.shuffle()
 	
 	for i in range(num_gifts):
 		var pos : Vector2i = positions_possible_gifts.pop_back().pos
 		var type : Gift.Type = all_types.pop_back()
-		gift_positions.append(Vector3(pos.x, get_random_height(), pos.y))
+		
+		# ensure gifts are ABOVE buildings, if one's in that cell (otherwise height is just 0)
+		var min_height := grid.get_cell_at(pos).height
+		var height := maxf(get_random_height(), min_height + 0.5)
+		
+		gift_positions.append(Vector3(pos.x, height, pos.y))
 		gift_types.append(type)
 		grid.get_cell_at(pos).set_content(GridCell.ContentType.GIFT)
 
@@ -97,6 +119,7 @@ func get_random_building_size() -> Vector3:
 	var x : float = randi_range(1,3)
 	var y : float = get_random_height()
 	var z : float = randi_range(1,3)
+	if Global.config.in_mode_2d(): z = 1
 	return Vector3(x, y, z)
 
 func count_buildings() -> int:

@@ -15,6 +15,8 @@ func _on_collided(_b:Building) -> void:
 	change(-damage)
 
 func change(dh:float) -> void:
+	if Global.config.in_mode_2d() and Global.config.turn_off_damage_in_2d: return
+	
 	health = clampf(health + dh, 0.0, max_health)
 	changed.emit(health)
 	

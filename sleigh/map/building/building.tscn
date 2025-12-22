@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b338djlf45txh"]
+[gd_scene load_steps=17 format=3 uid="uid://b338djlf45txh"]
 
 [ext_resource type="Script" uid="uid://bs7hphgb5ksl8" path="res://sleigh/map/building/building.gd" id="1_043bo"]
-[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_4ry06"]
 [ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="3_4ry06"]
+[ext_resource type="Script" uid="uid://ee5cmlhov41w" path="res://sleigh/map/building/building_visuals.gd" id="3_41io3"]
+[ext_resource type="Texture2D" uid="uid://b1subo7q6r4hn" path="res://sleigh/map/building/building-bg.webp" id="3_pkhbj"]
 [ext_resource type="PackedScene" uid="uid://dblb3tctrvpsk" path="res://sleigh/shared/asset_sprite.tscn" id="4_pdnlk"]
+[ext_resource type="PackedScene" uid="uid://o1h50wudhrcy" path="res://sleigh/map/building/parts/part_roof.tscn" id="4_q287p"]
+[ext_resource type="PackedScene" uid="uid://duu840fk8r16" path="res://sleigh/map/building/parts/part_window.tscn" id="5_k0sl8"]
+[ext_resource type="Texture2D" uid="uid://c6leljk8xiwbk" path="res://sleigh/sleigh/star_particle.webp" id="5_pkhbj"]
+[ext_resource type="PackedScene" uid="uid://dn731n7uvtos3" path="res://sleigh/map/building/parts/part_bricks.tscn" id="6_pu2so"]
+[ext_resource type="PackedScene" uid="uid://dwp5eri1v7xun" path="res://sleigh/map/building/parts/part_light.tscn" id="7_k0sl8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4ry06"]
 bounce = 0.2
@@ -11,15 +17,37 @@ bounce = 0.2
 [sub_resource type="BoxShape3D" id="BoxShape3D_tthtb"]
 size = Vector3(1, 3, 1)
 
-[node name="Building" type="StaticBody3D" unique_id=1833297393 node_paths=PackedStringArray("col_shape", "sprite", "sprite_type", "module_mini_map", "area_node", "area_shape")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41io3"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("5_pkhbj")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_tml22"]
+
+[sub_resource type="Curve" id="Curve_nyncw"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32066506, 20.25409), -268.1869, -268.1869, 0, 0, Vector2(1, 32.994568), 235.25168, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_q287p"]
+_data = [Vector2(0.0023752972, 0.003176093), 0.0, 0.0, 0, 0, Vector2(0.12114014, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Building" type="StaticBody3D" unique_id=1833297393 node_paths=PackedStringArray("col_shape", "module_mini_map", "area_node", "area_shape", "particles_visit", "visuals")]
 physics_material_override = SubResource("PhysicsMaterial_4ry06")
 script = ExtResource("1_043bo")
 col_shape = NodePath("CollisionShape3D")
-sprite = NodePath("Sprite3D")
-sprite_type = NodePath("GiftType")
 module_mini_map = NodePath("ModuleMiniMap")
 area_node = NodePath("Area3D")
 area_shape = NodePath("Area3D/CollisionShape3D")
+particles_visit = NodePath("ParticlesVisit")
+visuals = NodePath("Visuals")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1595242334]
 shape = SubResource("BoxShape3D_tthtb")
@@ -28,12 +56,21 @@ shape = SubResource("BoxShape3D_tthtb")
 script = ExtResource("3_4ry06")
 metadata/_custom_type_script = "uid://bi3g4oooxayxu"
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1018732272]
+[node name="Visuals" type="Node3D" parent="." unique_id=1335763866 node_paths=PackedStringArray("sprite_background", "sprite_type")]
+script = ExtResource("3_41io3")
+sprite_background = NodePath("BG")
+sprite_type = NodePath("GiftType")
+part_roof = ExtResource("4_q287p")
+part_window = ExtResource("5_k0sl8")
+part_bricks = ExtResource("6_pu2so")
+part_light = ExtResource("7_k0sl8")
+
+[node name="BG" type="Sprite3D" parent="Visuals" unique_id=1018732272]
 shaded = true
 double_sided = false
-texture = ExtResource("2_4ry06")
+texture = ExtResource("3_pkhbj")
 
-[node name="GiftType" parent="." unique_id=1537408286 instance=ExtResource("4_pdnlk")]
+[node name="GiftType" parent="Visuals" unique_id=1537408286 instance=ExtResource("4_pdnlk")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.06768179)
 shaded = true
 double_sided = false
@@ -41,3 +78,24 @@ double_sided = false
 [node name="Area3D" type="Area3D" parent="." unique_id=611483470]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1315104657]
+
+[node name="ParticlesVisit" type="CPUParticles3D" parent="." unique_id=667887056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6626117, -0.5)
+material_override = SubResource("StandardMaterial3D_41io3")
+emitting = false
+amount = 28
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+mesh = SubResource("QuadMesh_tml22")
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+angle_min = -3.1
+angle_max = 3.1
+angle_curve = SubResource("Curve_nyncw")
+scale_amount_min = 0.1
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_q287p")

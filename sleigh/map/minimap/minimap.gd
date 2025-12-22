@@ -1,11 +1,11 @@
 extends Node2D
 class_name MiniMap
 
-const SIZE := Vector2i(256, 128)
+const SIZE := Vector2i(192, 96)
 const EDGE_MARGIN := 16
 
-const MIN_ELEMENT_SIZE := 14.0
-const MAX_ELEMENT_SIZE := 128.0
+const MIN_ELEMENT_SIZE := 12.0
+const MAX_ELEMENT_SIZE := 96.0
 
 var top_left_world : Vector3
 var bottom_right_world : Vector3
@@ -16,6 +16,7 @@ var bottom_right_world : Vector3
 func _ready() -> void:
 	get_viewport().size_changed.connect(_on_size_changed)
 	_on_size_changed()
+	set_visible(Global.config.in_mode_3d())
 
 func _draw() -> void:
 	var map_size := map_data.bounds
@@ -23,7 +24,7 @@ func _draw() -> void:
 	var map_scale := size_pixels / Vector2(map_size.x, map_size.z)
 	
 	# BG
-	var border_radius := 16
+	var border_radius := 8
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
 	style_box.bg_color = Color.WHITE
@@ -55,7 +56,7 @@ func draw_asset_texture(m:ModuleMiniMap, map_scale:Vector2, type: Gift.Type) -> 
 	draw_texture_rect_region(texture_assets, rect_square, rect_source)
 
 func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false) -> void:
-	var border_radius := 8
+	var border_radius := 4
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
 	style_box.bg_color = m.get_color()

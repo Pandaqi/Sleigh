@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dokcui25j7aay"]
+[gd_scene load_steps=29 format=3 uid="uid://dokcui25j7aay"]
 
 [ext_resource type="Script" uid="uid://cpp6ig46xue1p" path="res://sleigh/sleigh/sleigh.gd" id="1_wuwth"]
-[ext_resource type="Texture2D" uid="uid://ut3oap3j6ut1" path="res://icon.svg" id="2_hm7cj"]
+[ext_resource type="Script" uid="uid://qkbddqfp3y8p" path="res://sleigh/sleigh/module_visuals.gd" id="2_vjg3j"]
 [ext_resource type="Script" uid="uid://bi3g4oooxayxu" path="res://sleigh/map/minimap/module_mini_map.gd" id="3_0l66c"]
+[ext_resource type="Texture2D" uid="uid://c6leljk8xiwbk" path="res://sleigh/sleigh/star_particle.webp" id="3_8tobh"]
 [ext_resource type="Script" uid="uid://civey7fk2e1e1" path="res://sleigh/sleigh/module_mover.gd" id="3_bkv40"]
+[ext_resource type="Texture2D" uid="uid://kqywa4dwfvkx" path="res://sleigh/sleigh/sleigh.webp" id="3_vjg3j"]
 [ext_resource type="Script" uid="uid://b6ii1tr8f1usd" path="res://sleigh/sleigh/module_delivery.gd" id="4_bkv40"]
 [ext_resource type="Script" uid="uid://c4o6w2b3rqn4g" path="res://sleigh/sleigh/module_collider.gd" id="5_7aq07"]
 [ext_resource type="Script" uid="uid://cy30dom8p0ejr" path="res://sleigh/sleigh/arrows/arrows.gd" id="5_foh4u"]
@@ -13,14 +15,75 @@
 [ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="7_0l66c"]
 [ext_resource type="Script" uid="uid://weimd32n6iap" path="res://sleigh/sleigh/module_health.gd" id="7_hm7cj"]
 [ext_resource type="Script" uid="uid://b0rcvgf6equv2" path="res://sleigh/sleigh/module_grabber.gd" id="7_sgmq2"]
+[ext_resource type="AudioStream" uid="uid://bb0ls2oijh7pg" path="res://sleigh/sleigh/sleigh_bells.mp3" id="9_6n86x"]
+[ext_resource type="AudioStream" uid="uid://ct6mupapqy0my" path="res://sleigh/sleigh/bounce_hit.mp3" id="12_tb4y2"]
+[ext_resource type="AudioStream" uid="uid://dfd3pjek1atr6" path="res://sleigh/gift/gift_grab.mp3" id="15_408hu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j7nqt"]
 friction = 0.0
 bounce = 0.1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rt3xt"]
-radius = 0.25146484
-height = 1.3369141
+[sub_resource type="SphereShape3D" id="SphereShape3D_8tobh"]
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjv85"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_8tobh")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_rijut"]
+
+[sub_resource type="Curve" id="Curve_ypy6y"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32066506, 20.25409), -268.1869, -268.1869, 0, 0, Vector2(1, 32.994568), 235.25168, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_wc166"]
+_data = [Vector2(0.0023752972, 0.003176093), 0.0, 0.0, 0, 0, Vector2(0.6152019, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_sgmq2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vjg3j"]
+resource_name = "damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.5565991, 0.42439124, 0.43038177, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tb4y2"]
+_data = {
+&"RESET": SubResource("Animation_sgmq2"),
+&"damage": SubResource("Animation_vjg3j")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_efyhh"]
 radius = 0.9365059
@@ -42,15 +105,45 @@ module_mover = NodePath("ModuleMover")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=432937084]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_rt3xt")
+shape = SubResource("SphereShape3D_8tobh")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=547980011]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-texture = ExtResource("2_hm7cj")
+[node name="ModuleVisuals" type="Node3D" parent="." unique_id=471351975 node_paths=PackedStringArray("body", "module_health", "module_collider", "anim_player", "sprite", "particles_move")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09119177, 0)
+script = ExtResource("2_vjg3j")
+body = NodePath("..")
+module_health = NodePath("../ModuleHealth")
+module_collider = NodePath("../ModuleCollider")
+anim_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite3D")
+particles_move = NodePath("ParticlesMove")
 
-[node name="ModuleMover" type="Node3D" parent="." unique_id=1535471441 node_paths=PackedStringArray("body", "arrows")]
+[node name="ParticlesMove" type="CPUParticles3D" parent="ModuleVisuals" unique_id=615006384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+material_override = SubResource("StandardMaterial3D_sjv85")
+amount = 14
+randomness = 1.0
+mesh = SubResource("QuadMesh_rijut")
+gravity = Vector3(0, 0, 0)
+angle_min = -3.1
+angle_max = 3.1
+angle_curve = SubResource("Curve_ypy6y")
+scale_amount_min = 0.2
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_wc166")
+
+[node name="Sprite3D" type="Sprite3D" parent="ModuleVisuals" unique_id=547980011]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+texture = ExtResource("3_vjg3j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ModuleVisuals" unique_id=541168147]
+libraries = {
+&"": SubResource("AnimationLibrary_tb4y2")
+}
+
+[node name="ModuleMover" type="Node3D" parent="." unique_id=1535471441 node_paths=PackedStringArray("body", "audio_bells", "arrows")]
 script = ExtResource("3_bkv40")
 body = NodePath("..")
+audio_bells = NodePath("AudioBells")
 arrows = NodePath("Arrows")
 
 [node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629 node_paths=PackedStringArray("arrow_container", "timer")]
@@ -63,6 +156,11 @@ timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="ModuleMover/Arrows" unique_id=1338193749]
 
+[node name="AudioBells" type="AudioStreamPlayer2D" parent="ModuleMover" unique_id=1702382712]
+stream = ExtResource("9_6n86x")
+volume_db = -6.0
+bus = &"Game"
+
 [node name="ModuleMiniMap" type="Node3D" parent="." unique_id=1580184528]
 script = ExtResource("3_0l66c")
 color = Color(1, 0, 0, 1)
@@ -72,19 +170,32 @@ size = Vector3(1, 1, 0.5)
 script = ExtResource("4_bkv40")
 module_gifts = NodePath("../ModuleGifts")
 
-[node name="ModuleCollider" type="Node3D" parent="." unique_id=1070025929 node_paths=PackedStringArray("body")]
+[node name="ModuleCollider" type="Node3D" parent="." unique_id=1070025929 node_paths=PackedStringArray("body", "timer", "audio_bounce")]
 script = ExtResource("5_7aq07")
 body = NodePath("..")
+timer = NodePath("Timer")
+audio_bounce = NodePath("AudioBounce")
 
-[node name="ModuleGifts" type="Node3D" parent="." unique_id=1700441615]
+[node name="Timer" type="Timer" parent="ModuleCollider" unique_id=168335841]
+wait_time = 0.4
+one_shot = true
+
+[node name="AudioBounce" type="AudioStreamPlayer2D" parent="ModuleCollider" unique_id=1398577870]
+stream = ExtResource("12_tb4y2")
+bus = &"Game"
+
+[node name="ModuleGifts" type="Node3D" parent="." unique_id=1700441615 node_paths=PackedStringArray("audio_delivery")]
 script = ExtResource("6_foh4u")
+audio_delivery = NodePath("AudioDelivery")
 map_data = ExtResource("7_0l66c")
+
+[node name="AudioDelivery" type="AudioStreamPlayer2D" parent="ModuleGifts" unique_id=771027520]
+stream = ExtResource("15_408hu")
+bus = &"Game"
 
 [node name="ModuleHealth" type="Node3D" parent="." unique_id=296194529 node_paths=PackedStringArray("body")]
 script = ExtResource("7_hm7cj")
 body = NodePath("..")
-health = null
-max_health = null
 
 [node name="ModuleGrabber" type="Node3D" parent="." unique_id=2079427754 node_paths=PackedStringArray("sleigh", "area", "module_gifts")]
 script = ExtResource("7_sgmq2")

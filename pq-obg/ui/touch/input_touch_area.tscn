@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://calsi077dmbrd" path="res://pq-obg/ui/textures/button_touch_bg.tres" id="2_0hsrc"]
 [ext_resource type="Texture2D" uid="uid://wlqd7x0q7t2k" path="res://pq-obg/ui/textures/button_touch_content.tres" id="3_sc3l5"]
 
-[node name="InputTouchArea2" type="MarginContainer" unique_id=2030268404 node_paths=PackedStringArray("container_sprites", "container", "label")]
+[node name="InputTouchArea" type="MarginContainer" unique_id=2030268404 node_paths=PackedStringArray("container_sprites", "container", "label")]
 offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("1_kr5yn")

@@ -3,30 +3,48 @@
 [ext_resource type="Script" uid="uid://bog0m3bhuc2mp" path="res://pq-obg/ui/button_instructions/button_instructions.gd" id="1_hgfec"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="3_csk8l"]
 
-[node name="ButtonInstructions" type="CanvasLayer" unique_id=13185939 node_paths=PackedStringArray("instruction_container")]
+[node name="ButtonInstructions" type="CanvasLayer" unique_id=13185939 node_paths=PackedStringArray("root_container", "margin_container", "instruction_container")]
 layer = 16
 script = ExtResource("1_hgfec")
-instruction_container = NodePath("Control/MarginContainer/HBoxContainer")
+root_container = NodePath("Control/Root")
+margin_container = NodePath("Control/Root/MarginContainer")
+instruction_container = NodePath("Control/Root/MarginContainer/HBoxContainer")
 metadata/_custom_type_script = "uid://bog0m3bhuc2mp"
 
-[node name="Control" type="Control" parent="." unique_id=2138470192]
+[node name="Control" type="Control" parent="." unique_id=2058781265]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Root" type="Control" parent="Control" unique_id=2138470192]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 theme = ExtResource("3_csk8l")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=531285955]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Root" unique_id=531285955]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 32.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -49.0
 grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer" unique_id=1797108689]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Root/MarginContainer" unique_id=1797108689]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1

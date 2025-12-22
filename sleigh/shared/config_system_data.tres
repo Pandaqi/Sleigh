@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="ConfigSystemData" load_steps=18 format=3 uid="uid://dvtq7hggu4kjk"]
+[gd_resource type="Resource" script_class="ConfigSystemData" load_steps=21 format=3 uid="uid://dvtq7hggu4kjk"]
 
 [ext_resource type="AudioStream" uid="uid://cfe2jylsp4enn" path="res://pq-obg/audio/sfx/ui_click.mp3" id="1_5brs3"]
+[ext_resource type="AudioStream" uid="uid://ctwtw34vbj5pl" path="res://sleigh/shared/bg-theme.mp3" id="1_srgou"]
 [ext_resource type="PackedScene" uid="uid://bfclclol7g0ea" path="res://pq-obg/ui/button_visualizer/button_visualizer.tscn" id="2_f3dyq"]
+[ext_resource type="Texture2D" uid="uid://b7cayt6sin32x" path="res://sleigh/ui/menu-bg.webp" id="2_xhj4w"]
 [ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="3_d5p23"]
 [ext_resource type="FontFile" uid="uid://dqfdxg0cxiph" path="res://sleigh/ui/fonts/Playfair_9pt-Black.ttf" id="3_m7dcb"]
 [ext_resource type="FontFile" uid="uid://tfgsyi5o67fk" path="res://sleigh/ui/fonts/Playfair_9pt-BlackItalic.ttf" id="4_ic8br"]
@@ -17,16 +19,23 @@
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="11_tsist"]
 [ext_resource type="Script" uid="uid://b8gcpdtp867fe" path="res://pq-obg/tutorial/tutorial_stage.gd" id="12_lbq6e"]
 [ext_resource type="Script" uid="uid://dui163ptds6sq" path="res://pq-obg/settings/config_system_data.gd" id="16_go5d3"]
+[ext_resource type="Resource" uid="uid://caqj2vd4wt7wk" path="res://sleigh/ui/settings/tab_game.tres" id="16_ic8br"]
 
 [resource]
 script = ExtResource("16_go5d3")
 game_id = "sleigh"
 game_version = "1.3.2"
 game_scene = "sleigh/main.tscn"
+settings = Array[ExtResource("8_dtlrj")]([ExtResource("9_if6eq"), ExtResource("10_go5d3"), ExtResource("16_ic8br")])
+audio_bg = Array[AudioStream]([ExtResource("1_srgou")])
+bg_image = ExtResource("2_xhj4w")
 font_body_regular = ExtResource("6_srgou")
 font_body_italic = ExtResource("5_xhj4w")
 font_body_bold = ExtResource("3_m7dcb")
 font_body_bold_italic = ExtResource("4_ic8br")
 font_heading = ExtResource("7_i4w8a")
 font_special = ExtResource("7_i4w8a")
+color_main = Color(0.32156864, 0.34117648, 0.5137255, 1)
+button_instructions_anchor = 3
+button_visualizer_scale_base = 0.04
 metadata/_custom_type_script = "uid://dui163ptds6sq"

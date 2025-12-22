@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhexc5kxv8rjt"]
+[gd_scene load_steps=26 format=3 uid="uid://dhexc5kxv8rjt"]
 
 [ext_resource type="Script" uid="uid://b2osy7g4nh1uw" path="res://sleigh/map/map.gd" id="1_3fl1h"]
 [ext_resource type="Script" uid="uid://cmo7eflm8fgbt" path="res://sleigh/map/camera/camera.gd" id="1_17jm3"]
@@ -12,18 +12,37 @@
 [ext_resource type="Script" uid="uid://ous4irav610w" path="res://sleigh/map/minimap/minimap.gd" id="10_fqevc"]
 [ext_resource type="Script" uid="uid://b18bebtkcnr6c" path="res://sleigh/score/score.gd" id="10_i7510"]
 [ext_resource type="Texture2D" uid="uid://ukm4mtekm3x7" path="res://sleigh/shared/assets.webp" id="11_j7nqt"]
+[ext_resource type="Texture2D" uid="uid://bocm45it301y4" path="res://sleigh/map/bg-trees.webp" id="12_grf1u"]
+[ext_resource type="Texture2D" uid="uid://buoj886sn6e1c" path="res://sleigh/map/bg-stars.webp" id="12_ptxqo"]
 [ext_resource type="PackedScene" uid="uid://cl6irfet6cfe2" path="res://sleigh/player/player.tscn" id="14_esawn"]
 [ext_resource type="PackedScene" uid="uid://msicby0slq1g" path="res://sleigh/gift/gift.tscn" id="15_efyhh"]
 [ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/players/player_spawner.gd" id="16_6g0k4"]
 [ext_resource type="PackedScene" uid="uid://bm52gxys3unnf" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.tscn" id="16_78dh5"]
 [ext_resource type="PackedScene" uid="uid://c3mew7u5cevle" path="res://pq-obg/state/state.tscn" id="16_cy4wp"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="17_6g0k4"]
+[ext_resource type="AudioStream" uid="uid://c88ygjeu3x2os" path="res://sleigh/ui/finish_cheers.mp3" id="17_78dh5"]
+[ext_resource type="AudioStream" uid="uid://bwhvkf2di35xh" path="res://sleigh/ui/finish_bad.mp3" id="18_grhbm"]
 
 [sub_resource type="Environment" id="Environment_efyhh"]
 background_mode = 1
 background_color = Color(0.1764706, 0.1882353, 0.42745098, 1)
 ambient_light_color = Color(0.47701287, 0.67929125, 0.9886314, 1)
 ambient_light_energy = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grf1u"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.03529412)
+albedo_texture = ExtResource("12_ptxqo")
+detail_enabled = true
+detail_blend_mode = 1
+uv1_scale = Vector3(5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptxqo"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("12_grf1u")
+uv1_scale = Vector3(5, 1, 1)
 
 [node name="Main" type="Node3D" unique_id=690436519]
 
@@ -37,6 +56,8 @@ keep_aspect = 0
 projection = 1
 current = true
 size = 20.0
+near = 0.02
+far = 200.0
 script = ExtResource("1_17jm3")
 map_data = ExtResource("4_f7sgw")
 
@@ -54,7 +75,7 @@ map_data = ExtResource("4_f7sgw")
 [node name="Generator" type="Node3D" parent="Map" unique_id=1489835639]
 script = ExtResource("1_tthtb")
 
-[node name="Visualizer" type="Node3D" parent="Map" unique_id=2060043554 node_paths=PackedStringArray("ui")]
+[node name="Visualizer" type="Node3D" parent="Map" unique_id=2060043554 node_paths=PackedStringArray("ui", "background_trees", "background_stars")]
 script = ExtResource("2_ffeu0")
 building_scene = ExtResource("3_kwj5i")
 floor_scene = ExtResource("4_3fl1h")
@@ -62,17 +83,31 @@ gift_scene = ExtResource("15_efyhh")
 sleigh_scene = ExtResource("3_fqevc")
 map_data = ExtResource("4_f7sgw")
 ui = NodePath("../../UI")
+background_trees = NodePath("BackgroundTrees")
+background_stars = NodePath("BackgroundStars")
+
+[node name="BackgroundStars" type="Sprite3D" parent="Map/Visualizer" unique_id=2146012257]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_grf1u")
+texture = ExtResource("12_grf1u")
+
+[node name="BackgroundTrees" type="Sprite3D" parent="Map/Visualizer" unique_id=721300774]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_ptxqo")
+texture = ExtResource("12_grf1u")
 
 [node name="Score" type="Node3D" parent="." unique_id=359371305 node_paths=PackedStringArray("ui")]
 script = ExtResource("10_i7510")
 map_data = ExtResource("4_f7sgw")
 ui = NodePath("../UI")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu", "audio_victory", "audio_loss")]
 script = ExtResource("10_1iysh")
 score = NodePath("../Score")
 map_data = ExtResource("4_f7sgw")
 game_over_menu = NodePath("GameOverMenu")
+audio_victory = NodePath("AudioVictory")
+audio_loss = NodePath("AudioLoss")
 
 [node name="Minimap" type="Node2D" parent="UI" unique_id=297920205]
 position = Vector2(459, 333)
@@ -81,6 +116,14 @@ map_data = ExtResource("4_f7sgw")
 texture_assets = ExtResource("11_j7nqt")
 
 [node name="GameOverMenu" parent="UI" unique_id=721452580 instance=ExtResource("16_78dh5")]
+
+[node name="AudioVictory" type="AudioStreamPlayer" parent="UI" unique_id=234401189]
+process_mode = 3
+stream = ExtResource("17_78dh5")
+
+[node name="AudioLoss" type="AudioStreamPlayer" parent="UI" unique_id=1255121498]
+process_mode = 3
+stream = ExtResource("18_grhbm")
 
 [node name="State" parent="." unique_id=1145839826 instance=ExtResource("16_cy4wp")]
 

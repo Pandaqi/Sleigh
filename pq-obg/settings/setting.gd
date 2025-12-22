@@ -98,6 +98,7 @@ func ensure_matching_types() -> void:
 	if type == Type.COLOR: type_display = TypeDisplay.COLOR
 	if type == Type.CHECKBOX: type_display = TypeDisplay.BOOL
 	if type == Type.RANGE_DISCRETE: type_display = TypeDisplay.INT
+	if type == Type.DROPDOWN: type_display = TypeDisplay.NONE
 
 func reset() -> void:
 	_on_value_changed(get_default())

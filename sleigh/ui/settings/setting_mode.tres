@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://v6fbqkcw2qg6"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_qmku5"]
+
+[resource]
+script = ExtResource("1_qmku5")
+type = 3
+key = "play_mode"
+label = "ST_PLAY_MODE"
+default = "2D"
+options = ["2D", "3D"]
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

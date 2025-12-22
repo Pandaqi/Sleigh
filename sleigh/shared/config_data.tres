@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ConfigData" load_steps=2 format=3 uid="uid://tl2xaotm7en8"]
 
-[ext_resource type="Script" uid="uid://3cp0i8qutm5s" path="res://pepernotenfabriek/shared/config_data.gd" id="1_mr8dg"]
+[ext_resource type="Script" uid="uid://3cp0i8qutm5s" path="res://sleigh/shared/config_data.gd" id="1_mr8dg"]
 
 [resource]
 script = ExtResource("1_mr8dg")

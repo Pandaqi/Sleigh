@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameOverDataCustom" load_steps=3 format=3 uid="uid://50loh51wa5mc"]
+
+[ext_resource type="Script" uid="uid://cmqwlfiq04qho" path="res://sleigh/ui/game_over_data.gd" id="1_f4gfg"]
+[ext_resource type="Resource" uid="uid://bnf7t7l0i17r7" path="res://sleigh/map/map_data.tres" id="1_nmje2"]
+
+[resource]
+script = ExtResource("1_f4gfg")
+map_data = ExtResource("1_nmje2")
+metadata/_custom_type_script = "uid://cmqwlfiq04qho"

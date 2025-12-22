@@ -15,6 +15,8 @@ func _ready():
 func activate():
 	set_visible(true)
 	
+	label_header.add_theme_font_override("font", Global.theme.get_font(ThemeManager.FontType.HEADING))
+	
 	var game_over_data := Global.config_system.game_over_data
 	if game_over_data:
 		label_header.text = game_over_data.get_header()

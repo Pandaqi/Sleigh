@@ -4,6 +4,8 @@ class_name UI
 @export var score : Score
 @export var map_data : MapData
 @export var game_over_menu : GameOverMenu
+@export var audio_victory : AudioStreamPlayer
+@export var audio_loss : AudioStreamPlayer
 
 var game_over := false
 
@@ -32,6 +34,9 @@ func goto_game_over(good := false) -> void:
 	
 	print("GAME OVER! Good? ", good)
 	game_over = true
+	
+	if good: audio_victory.play()
+	else: audio_loss.play()
 	
 	map_data.game_over_good = good
 	map_data.score = ceili(score.score + Global.config.score_bonus_win)

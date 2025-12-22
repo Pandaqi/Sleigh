@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://duu840fk8r16"]
+
+[ext_resource type="Texture2D" uid="uid://ukm4mtekm3x7" path="res://sleigh/shared/assets.webp" id="1_hjo6d"]
+
+[node name="PartWindow" type="Sprite3D" unique_id=1385354842]
+shaded = true
+double_sided = false
+texture = ExtResource("1_hjo6d")
+hframes = 4
+vframes = 4
+frame = 5

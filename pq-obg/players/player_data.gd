@@ -6,8 +6,6 @@ var colors_available : Array[Color] = []
 var colors_used : Array[Color] = []
 var touch_area_layer : Control
 
-@warning_ignore("unused_signal")
-signal setup_finished()
 signal reset_finished()
 
 func reset(colors:Array[Color]) -> void:

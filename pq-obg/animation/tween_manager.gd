@@ -3,16 +3,17 @@ class_name TweenManager
 
 var base_duration := 0.3
 
-func play_popup_tween(obj:Node2D) -> Tween:
-	var cur_scale := obj.scale
+func play_popup_tween(obj:Node) -> Tween:
+	var cur_scale = obj.scale
 	var tw := get_tree().create_tween()
 	tw.tween_property(obj, "scale", cur_scale*1.35, 0.33*base_duration)
 	tw.tween_property(obj, "scale", cur_scale, 0.66*base_duration)
 	return tw
 
-func play_shrink_tween(obj:Node2D) -> Tween:
+func play_shrink_tween(obj:Node) -> Tween:
 	var tw := get_tree().create_tween()
-	tw.tween_property(obj, "scale", Vector2.ZERO, base_duration)
+	var target_scale = Vector2.ZERO if (obj is Node2D) else Vector3.ZERO
+	tw.tween_property(obj, "scale", target_scale, base_duration)
 	return tw
 
 func play_fadein_tween(obj:Node, dur := base_duration) -> Tween:
@@ -28,3 +29,11 @@ func play_fadeout_tween(obj:Node, dur := base_duration) -> Tween:
 	var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tw.tween_property(obj, "modulate:a", 0.0, dur)
 	return tw 
+
+func play_rotate_tween(obj:Node, dur := base_duration, direction := 1) -> Tween:
+	var tw := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	var target_rotation = obj.rotation
+	if obj is Node3D: target_rotation.z += direction * 2 * PI
+	else: target_rotation += direction * 2 * PI
+	tw.tween_property(obj, "rotation", target_rotation, dur)
+	return tw

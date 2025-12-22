@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=4 format=3 uid="uid://ch6fbk5gkjyge"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_lxbnn"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_s5ub5"]
+[ext_resource type="Resource" uid="uid://v6fbqkcw2qg6" path="res://sleigh/ui/settings/setting_mode.tres" id="3_s5ub5"]
+
+[resource]
+script = ExtResource("1_lxbnn")
+settings = Array[ExtResource("2_s5ub5")]([ExtResource("3_s5ub5")])
+label = "GROUP_GAME"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

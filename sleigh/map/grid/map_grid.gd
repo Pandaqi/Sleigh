@@ -34,6 +34,9 @@ func create() -> void:
 			
 			cell.set_possible_contents(starting_state.duplicate())
 
+func get_cells() -> Array[GridCell]:
+	return grid_flat
+
 func get_row(idx:int) -> Array[GridCell]:
 	var arr : Array[GridCell] = []
 	for x in range(size.x):

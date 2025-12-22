@@ -16,6 +16,16 @@ var element_scale := 1.0
 var margin := Vector2.ZERO
 var elements : Array = []
 
+# @TODO: this static functionality is very useful, but the rest is not used anymore now; how to clean up?
+static func get_control_preset(anchor:Anchor) -> Control.LayoutPreset:
+	if anchor == Anchor.CENTER: return Control.PRESET_CENTER
+	if anchor == Anchor.LEFT: return Control.PRESET_CENTER_LEFT
+	if anchor == Anchor.RIGHT: return Control.PRESET_CENTER_RIGHT
+	if anchor == Anchor.TOP: return Control.PRESET_CENTER_TOP
+	if anchor == Anchor.BOTTOM: return Control.PRESET_CENTER_BOTTOM
+	if anchor == Anchor.CORNERS: return Control.PRESET_TOP_LEFT
+	return Control.PRESET_CENTER
+
 func _init(a:Anchor, s := Vector2(128,128), sc := 1.0, m := Vector2.ZERO) -> void:
 	anchor = a
 	element_size = s
@@ -23,7 +33,7 @@ func _init(a:Anchor, s := Vector2(128,128), sc := 1.0, m := Vector2.ZERO) -> voi
 	margin = m
 
 func set_control_node(c:Control) -> void:
-	c.set_anchors_preset(get_control_preset(), false)
+	c.set_anchors_preset(get_control_preset(anchor), false)
 
 func _ready() -> void:
 	get_tree().get_root().size_changed.connect(refresh)
@@ -95,12 +105,3 @@ func get_anchor_positions_corners(num:int) -> Array[Vector2]:
 		Vector2(margin.x, vp_size.y - margin.y)
 	]
 	return arr.slice(0, num)
-
-func get_control_preset() -> Control.LayoutPreset:
-	if anchor == Anchor.CENTER: return Control.PRESET_CENTER
-	if anchor == Anchor.LEFT: return Control.PRESET_LEFT_WIDE
-	if anchor == Anchor.RIGHT: return Control.PRESET_RIGHT_WIDE
-	if anchor == Anchor.TOP: return Control.PRESET_TOP_WIDE
-	if anchor == Anchor.BOTTOM: return Control.PRESET_BOTTOM_WIDE
-	if anchor == Anchor.CORNERS: return Control.PRESET_TOP_LEFT
-	return Control.PRESET_CENTER

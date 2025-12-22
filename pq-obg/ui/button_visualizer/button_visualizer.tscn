@@ -4,8 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://dch28bffyv2mx" path="res://pq-obg/ui/sprite_ui.tscn" id="2_gs34i"]
 [ext_resource type="Theme" uid="uid://ba2lixeo4d30y" path="res://pq-obg/ui/default_theme.tres" id="3_lls0i"]
 
-[node name="ButtonVisualizer" type="Node2D" unique_id=636806661]
+[node name="ButtonVisualizer" type="Node2D" unique_id=636806661 node_paths=PackedStringArray("sprite_ui", "keyboard_label", "gamepad_label", "touch_label", "sub_sprites", "mouse_left", "mouse_right", "mouse_middle", "gamepad_left", "gamepad_right", "gamepad_top", "gamepad_bottom")]
 script = ExtResource("1_nkctm")
+sprite_ui = NodePath("SpriteUI")
+keyboard_label = NodePath("KeyboardLabel")
+gamepad_label = NodePath("GamepadLabel")
+touch_label = NodePath("TouchLabel")
+sub_sprites = NodePath("SubSprites")
+mouse_left = NodePath("SubSprites/MouseLeft")
+mouse_right = NodePath("SubSprites/MouseRight")
+mouse_middle = NodePath("SubSprites/MouseMiddle")
+gamepad_left = NodePath("SubSprites/GamepadLeft")
+gamepad_right = NodePath("SubSprites/GamepadRight")
+gamepad_top = NodePath("SubSprites/GamepadTop")
+gamepad_bottom = NodePath("SubSprites/GamepadBottom")
 
 [node name="SpriteUI" parent="." unique_id=21074101 instance=ExtResource("2_gs34i")]
 frame = 2

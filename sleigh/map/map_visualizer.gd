@@ -7,6 +7,8 @@ class_name MapVisualizer
 @export var sleigh_scene : PackedScene
 @export var map_data : MapData
 @export var ui : UI
+@export var background_trees : Sprite3D
+@export var background_stars : Sprite3D
 
 func visualize(g:MapGenerator) -> void:
 	if map_data.sleigh: map_data.sleigh.queue_free()
@@ -84,6 +86,20 @@ func visualize(g:MapGenerator) -> void:
 		
 		boundary.add_child(shape_node)
 	add_child(boundary)
+	
+	# background behind it all
+	var extra_pattern_scale := 1.5
+	var bg_scale_factor := (bounds.x + 2) / 10.24 # pixels -> 3d world divides by 100, image is 512 pixels wide
+	background_trees.scale.x = bg_scale_factor
+	background_trees.scale.y /= extra_pattern_scale
+	var mat : StandardMaterial3D = background_trees.material_override
+	mat.uv1_scale.x = bg_scale_factor * extra_pattern_scale
+	background_trees.position = Vector3(0, 10.24*0.5*background_trees.scale.y, -2*bounds.z)
+	
+	background_stars.scale = Vector3(bg_scale_factor, bg_scale_factor, 1.0)
+	var mat_stars : StandardMaterial3D = background_stars.material_override
+	mat_stars.uv1_scale = background_stars.scale * extra_pattern_scale
+	background_stars.position = Vector3(0, 10.24*0.5*bg_scale_factor, -2*bounds.z-0.05) # 0.05 is tiebreaker to put it behind trees
 
 func randomize_position_within_cell(pos:Vector3) -> Vector3:
-	return pos + Vector3(randf()-0.5, randf()-0.5, randf()-0.5)
+	return pos + 0.66*Vector3(randf()-0.5, randf()-0.5, randf()-0.5)

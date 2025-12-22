@@ -11,6 +11,7 @@ var pos : Vector2i
 var possible_contents : Dictionary[ContentType,bool] = {}
 var content := ContentType.NONE
 var building := -1
+var height := 0.0
 
 func _init(p:Vector2i) -> void:
 	pos = p
@@ -41,3 +42,6 @@ func allow_content(tp:ContentType) -> void:
 
 func set_building(idx:int) -> void:
 	building = idx
+
+func set_height(h:float) -> void:
+	height = h

@@ -3,6 +3,7 @@ class_name ModuleMover
 
 @export var body : RigidBody3D
 @export var debug_input := true
+@export var audio_bells : AudioStreamPlayer2D
 
 @export var arrows : Arrows
 var ui_container : UI
@@ -25,6 +26,13 @@ func apply_arrow_input() -> void:
 func move(vec:Vector3) -> void:
 	var vec_final := vec * Vector3(move_force, lift_force, move_force) * body.mass
 	body.apply_central_force(vec_final)
+	
+	var vel := body.linear_velocity
+	var speed := vel.length()
+	if speed > 0.5 and not audio_bells.playing:
+		audio_bells.volume_db = lerpf(-9, 0, clamp(speed / 10.0, 0.0, 1.0))
+		audio_bells.pitch_scale = AudioManager.get_pitch_shift_semitones()
+		audio_bells.play()
 
 func debug_move() -> void:
 	if not debug_input: return

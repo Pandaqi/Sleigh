@@ -126,9 +126,65 @@ Hmm. I guess this shows, again, that you just can't think your way through probl
 
 Anyway, it works great now.
 
-## Finishing The Game
+## Wait, why not add a 2D mode?
+
+I had to take a break from this project for a few weeks to meet a few other (external) deadlines. As usual, when you come back with fresh eyes, two things have happened.
+
+* Your brain has continued thinking about this project and now has a few things to say about it.
+* You are completely out of the project's flow and ideas, and it takes a while before you're reacquainted with it.
+
+When I get back to an old project, the first hour or two is just me reading back my notes and TODOs and figuring out exactly what needed to be done. I usually start doing a few things ... only to scrap them 10 minutes later because I did them in a stupid way, because my brain wasn't in "project mode" yet.
+
+The first and biggest realization, though, was that this game did not need to be exclusively 3D. Yes, that's the fun gimmick I wanted to experiment with and turn into the unique feature for this game. (Especially compared to earlier One Button Games.) But there's no reason to _only_ offer that mode, when a simpler 2D mode is just around the corner!
+
+With a few changes, you can also simply play with a flat city and without that third dimension.
+
+* The city generator only places buildings in a straight line. (Plus it allows placing gifts above buildings, instead of only in "empty columns", as now there are too few of those.)
+* I only add the 2D arrows around the sleigh, not the ones going forward/backward. (I did add _more_ arrows, though, because now diagonals are fine and allow a higher player count.)
+* I completely hide the minimap and ignore everything related to it.
+* Some finetuning in terms of sizes, speeds, etcetera to make this version as playable as possible.
+
+Ta da! A 2D version! A much simpler version where you're just moving the sleigh left/right and up/down. Because the game is still "actually 3D", though, I still get a lot of benefits for free: realistic lighting, collisions, etcetera. The buildings and sleigh actually have a thickness equal to 1 grid cell, so I didn't need to change anything there to make the 2D version work 100%.
+
+As expected, it's a much simpler version. The sleigh is slightly easier to control and the city is smaller. There is no third dimension to track: if you see your sleigh landing on a building, then it _is_ doing that. The game needs no tutorial at all because it's so intuitive now. This version is absolutely playable with very young kids too.
+
+And so I decided to make this the "default" mode. It's very easy to get started and play, to understand the general idea. _Once you're familiar with the 2D mode_, moving on to the 3D mode is just a "next step". You get a minimap and an extra button (forward/backward), everything else stays the same.
+
+In fact, as it so often happens, I think I prefer the 2D version. It's so easy (as a creator/creative person) to get caught up in a shiny new idea, that you often make it too complicated or intricate for the usual, casual, regular person who might try that game. The 3D version is great unique challenge ... but the 2D version is just much simpler and more accessible. Usually, after a few iterations, games end up at a more "streamlined" and "distilled" version of the original idea.
+
+## The Weird Final Step: UI
+
+Everything is in the game now. 
+
+* I added some simple backgrounds (trees/distant homes at the bottom, stars at the top) and spread them to fill the entire screen no matter your screen size.
+* I "randomly generate" actual buildings now. That is, it places a flat roof on top, and random windows/bricks/decoration inside the building. 
+  * I think there are two interesting improvements here worth mentioning.
+  * First: I realized I could **tint** the entire building now, because all its sprites and everything were in my control/generated. This makes the game MUCH more colorful _and_ clear, because now you can see "red package -> must go to big red building".
+  * Second: I realized I could **animate** the individual parts now. It looks much more distinct and fun to make the _individual windows_ rotate/popup/react when you collide with a building, as opposed to flashing or animating the entire building rectangle.
+* This game barely needs sound effects, so I could copy most of them from the previous OBG. I wanted to create my own background music, but due to circumstances (horrible home renovations and other stuff) I can't record anything. So I asked AI to give me some generic Christmassy tune and it turned out fine.
+* I spent a bit more time on particles, though. Like, add a trail of stars to the sleigh and some "stardust" explosion when you land on buildings. Add a twinkle to presents waiting to be grabbed. It's still _very_ simple and small, but makes the game feel so much more alive. 
+* I added the custom settings for this game, such as controlling the size of your map or how many gifts to deliver.
+
+I left one strange element for last, though, which was the **UI (user interface)**. I normally never do that because it's such a crucial part of any game. The thing that shows how many gifts you've delivered and how much damage you've taken. And the thing that should "hold" the minimap and make it look nicer. 
+
+I ignored that because I had **no inspiration for how to create a good one**. I could _not_ figure it out! I accidentally made a game that has really strange requirements/limitations for the UI. 
+
+* The minimap takes up a lot of space. It looks weird off in one corner ( + would block touchscreen areas), while it would block too much of the actual map and your sleigh if centered at the bottom. It basically had to go the top.
+* If I add the other UI elements somewhere else, then the UI takes up even _more_ space and it looks disjointed. I'd much rather keep it all together in one group.
+* But that means I need to find a very efficient way to display GIFTS DELIVERED (/TO DELIVER) and HEALTH LEFT around the minimap. A look that _also works in 2D mode_, when the minimap is gone!
+* Just creating a text label for this and sticking it next to it is simple, yes, but it looks horrible _and_ young kids playing it won't understand that. I wanted a _textless_ way to indicate progress.
+
+I ended up improving my OBG system so it supports "anchoring" the instructions to any side of the screen (not just top). This allowed moving it away so the minimap had more space there, and I could build that into one big beautiful UI element. (At least, that was the idea---there was an attempt.) Then I used a _progress bar_ made of Christmas lights/baubles set into the frame around the minimap to show your progress. When the minimap is gone, you only have that horizontal self-contained "bauble bar", so it still looks thematic and fine.
+
+@TODO: IMAGE? IS THIS ACTUALLY WHAT I ENDED UP DOING?
+
+
+## A Finished Game
 
 @TODO
+
+
+
 
 
 
@@ -140,31 +196,22 @@ Anyway, it works great now.
 (Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't verify those, so let them be.)
 
 
-
-BUG: On restart, it tries to call something on buttonvisualizer before it's ready yet -> I can fix that by just making all those nodes @export instead of @onready
-
 VISUALS:
 
-* UI ARROWS: Show correctly + attach key hints  ----> Think about WHAT you actually control and HOW we display/change that (because "rotating" makes no sense now)
 * UI: show gifts delivered / left to deliver + sleigh damage
   * **Have two christmas trees extend from the sides of the minimap!** (either horizontal or vertical, depends on what looks best)
   * Alternatively, **CHRISTMAS BAUBLES** (and progress just means that more of them light up) --> maybe baubles _around_ the entire minimap?
   * Best to neatly collect these around the minimap, to make it look really good and conserve space
   * **REMEMBER** I already created the signals for this in `ui.gd`, all set up
-* Buildings should just randomly generate windows/doors/balconies on them (and PRETTY CHRISTMAS LIGHTS!)
-  * For extra clarity, buildings should just receive their own little accented color scheme (also in minimap)
-* BG should just be a repeating vague texture of a starry sky and stuff
-  * HOW = Need to create material, set sampler to repeat, then increase the UV coordinates
-* (At the bottom we can have trees / other unvisitable buildings though)
-* GAME OVER = add actual screen + message with statistics
+  * (ALSO MOVE MINIMAP BELOW OBG UI, OF COURSE, DON'T FORGET THAT.)
+
 
 POLISHING:
 
-* Animations: Collide (Sleigh + Building), Deliver Gift, Grab Gift, Move/Lift/Takeoff, (Taking Damage, floor is lava?)
-  * Make the gifts actually twinkle and rotate a little bit
-* SFX: Collide (Sleigh + Building), Deliver Gift, Grab Gift, Move, Game Over (Good + Bad), MAIN THEME CHRISTMASSY
-* Game Icon + Menu BG Image
-
+* BUG: Minimap doesn't properly check if sleigh behind it.
+* Buildings could look prettier
+* Custom Game Settings
+* BUG: GameOver => adding GameOverData with a reference to MapData creates a CYCLIC DEPENDENCY, how to fix? What is a GENERAL CLEAN SYSTEM for this?
 
 COLLISION LAYERS:
 

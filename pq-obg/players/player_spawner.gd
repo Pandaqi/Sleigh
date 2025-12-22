@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 	# @NOTE: delay because if we call now other objects' _ready() might not have triggered yet
 	await get_tree().process_frame
-	player_data.setup_finished.emit()
+	Global.input.buttons_changed.emit()
 
 func _on_button_added(btn:InputButton) -> void:
 	place_player(btn)

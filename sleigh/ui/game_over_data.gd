@@ -1,4 +1,5 @@
 extends GameOverData
+class_name GameOverDataCustom
 
 @export var map_data : MapData
 

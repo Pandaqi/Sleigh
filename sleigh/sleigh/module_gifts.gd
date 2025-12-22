@@ -3,6 +3,7 @@ class_name ModuleGifts
 
 var gifts : Array[Gift]
 var max_gifts_allowed : int
+@export var audio_delivery : AudioStreamPlayer2D
 
 @export var map_data : MapData
 
@@ -31,8 +32,12 @@ func is_empty() -> bool:
 func collect_gift(g:Gift) -> void:
 	gifts.append(g)
 	collected.emit(g)
+	g._on_grabbed()
 
 func deliver_gifts(arr:Array[Gift]) -> void:
+	audio_delivery.pitch_scale = AudioManager.get_pitch_shift_semitones()
+	audio_delivery.play()
+	
 	for gift in arr:
 		gifts.erase(gift)
 		gift.kill(true)

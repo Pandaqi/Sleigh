@@ -5,6 +5,8 @@ class_name ButtonInstructions
 
 var instructions : Array[ButtonInstruction] = []
 var instructions_by_type : Dictionary[InputButton.InputType,ButtonInstruction] = {}
+@export var root_container : Control
+@export var margin_container : Control
 @export var instruction_container : HBoxContainer
 
 func _ready() -> void:
@@ -13,11 +15,17 @@ func _ready() -> void:
 	create_instructions()
 	create_touch_area_layer()
 	Global.input.buttons_changed.connect(_on_buttons_changed)
-	# prepare_anchor_tool()
+	update_anchor()
 	_on_buttons_changed()
 
 	Global.pause_mode_change.connect(_on_pause_changed)
 	_on_pause_changed()
+
+func update_anchor() -> void:
+	var anchor := Global.config_system.button_instructions_anchor
+	var preset := ScreenAnchorTool.get_control_preset(anchor)
+	root_container.set_anchors_preset(preset, true)
+	margin_container.set_anchors_preset(preset, true) # this one needs to be updated too, otherwise it will anchor correctly ... but put the contents off-screen half the time.
 
 func create_touch_area_layer() -> void:
 	var node := CanvasLayer.new()
