@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dhexc5kxv8rjt"]
+[gd_scene load_steps=31 format=3 uid="uid://dhexc5kxv8rjt"]
 
 [ext_resource type="Script" uid="uid://b2osy7g4nh1uw" path="res://sleigh/map/map.gd" id="1_3fl1h"]
 [ext_resource type="Script" uid="uid://cmo7eflm8fgbt" path="res://sleigh/map/camera/camera.gd" id="1_17jm3"]
@@ -16,12 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://buoj886sn6e1c" path="res://sleigh/map/bg-stars.webp" id="12_ptxqo"]
 [ext_resource type="PackedScene" uid="uid://cl6irfet6cfe2" path="res://sleigh/player/player.tscn" id="14_esawn"]
 [ext_resource type="PackedScene" uid="uid://msicby0slq1g" path="res://sleigh/gift/gift.tscn" id="15_efyhh"]
+[ext_resource type="Texture2D" uid="uid://byfuv2shgaufs" path="res://sleigh/ui/ui-bg.png" id="16_5e6et"]
 [ext_resource type="Script" uid="uid://dt8klrrk4jcu1" path="res://pq-obg/players/player_spawner.gd" id="16_6g0k4"]
 [ext_resource type="PackedScene" uid="uid://bm52gxys3unnf" path="res://pq-obg/game_loop/game_over/game_over_menu/game_over_menu.tscn" id="16_78dh5"]
 [ext_resource type="PackedScene" uid="uid://c3mew7u5cevle" path="res://pq-obg/state/state.tscn" id="16_cy4wp"]
 [ext_resource type="PackedScene" uid="uid://nk31em7vq05f" path="res://pq-obg/ui/button_instructions/button_instructions.tscn" id="17_6g0k4"]
 [ext_resource type="AudioStream" uid="uid://c88ygjeu3x2os" path="res://sleigh/ui/finish_cheers.mp3" id="17_78dh5"]
+[ext_resource type="Texture2D" uid="uid://btl1ugfrt070k" path="res://sleigh/ui/bauble-progress-under.png" id="17_a5x6b"]
+[ext_resource type="Texture2D" uid="uid://cpijp8qp03rx8" path="res://sleigh/ui/bauble-progress-progress.png" id="18_1abcd"]
 [ext_resource type="AudioStream" uid="uid://bwhvkf2di35xh" path="res://sleigh/ui/finish_bad.mp3" id="18_grhbm"]
+[ext_resource type="Resource" uid="uid://50loh51wa5mc" path="res://sleigh/ui/game_over_data.tres" id="19_4kmft"]
+[ext_resource type="Texture2D" uid="uid://qa4dpyhyxgqe" path="res://sleigh/ui/ui-overlay.png" id="21_leysx"]
 
 [sub_resource type="Environment" id="Environment_efyhh"]
 background_mode = 1
@@ -101,21 +106,125 @@ script = ExtResource("10_i7510")
 map_data = ExtResource("4_f7sgw")
 ui = NodePath("../UI")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu", "audio_victory", "audio_loss")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu", "audio_victory", "audio_loss", "margin_container", "background_node", "minimap_node", "health_node", "overlay_node", "score_label", "score_progress", "health_label", "health_progress")]
 script = ExtResource("10_1iysh")
 score = NodePath("../Score")
 map_data = ExtResource("4_f7sgw")
 game_over_menu = NodePath("GameOverMenu")
 audio_victory = NodePath("AudioVictory")
 audio_loss = NodePath("AudioLoss")
+margin_container = NodePath("Control/MarginContainer")
+background_node = NodePath("Control/MarginContainer/BG")
+minimap_node = NodePath("Control/MarginContainer/VBoxContainer/Control")
+health_node = NodePath("Control/MarginContainer/VBoxContainer/HealthContainer")
+overlay_node = NodePath("Control/MarginContainer/Overlay")
+score_label = NodePath("Control/MarginContainer/VBoxContainer/ScoreContainer/ScoreLabel")
+score_progress = NodePath("Control/MarginContainer/VBoxContainer/ScoreContainer/ScoreProgress")
+health_label = NodePath("Control/MarginContainer/VBoxContainer/HealthContainer/HealthLabel")
+health_progress = NodePath("Control/MarginContainer/VBoxContainer/HealthContainer/HealthProgress")
+game_over_data = ExtResource("19_4kmft")
 
-[node name="Minimap" type="Node2D" parent="UI" unique_id=297920205]
-position = Vector2(459, 333)
+[node name="Control" type="CenterContainer" parent="UI" unique_id=1088968937]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control" unique_id=1001802203]
+custom_minimum_size = Vector2(288, 160)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="BG" type="TextureRect" parent="UI/Control/MarginContainer" unique_id=1074831795]
+layout_mode = 2
+texture = ExtResource("16_5e6et")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/MarginContainer" unique_id=1364120488]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="ScoreContainer" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer" unique_id=1557712231]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/ScoreContainer" unique_id=1209074881]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1.2747362, 1.2380934, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 10
+text = "90"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ScoreProgress" type="TextureProgressBar" parent="UI/Control/MarginContainer/VBoxContainer/ScoreContainer" unique_id=1182935876]
+custom_minimum_size = Vector2(136, 12)
+layout_mode = 2
+size_flags_horizontal = 8
+nine_patch_stretch = true
+texture_under = ExtResource("17_a5x6b")
+texture_progress = ExtResource("18_1abcd")
+
+[node name="Control" type="Control" parent="UI/Control/MarginContainer/VBoxContainer" unique_id=411901717]
+custom_minimum_size = Vector2(192, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Minimap" type="Node2D" parent="UI/Control/MarginContainer/VBoxContainer/Control" unique_id=297920205 node_paths=PackedStringArray("ui_container")]
+position = Vector2(96, 48)
 script = ExtResource("10_fqevc")
 map_data = ExtResource("4_f7sgw")
 texture_assets = ExtResource("11_j7nqt")
+ui_container = NodePath("../../../..")
+
+[node name="HealthContainer" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer" unique_id=1158579524]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="HealthProgress" type="TextureProgressBar" parent="UI/Control/MarginContainer/VBoxContainer/HealthContainer" unique_id=937949141]
+custom_minimum_size = Vector2(136, 12)
+layout_mode = 2
+size_flags_horizontal = 8
+nine_patch_stretch = true
+texture_under = ExtResource("17_a5x6b")
+texture_progress = ExtResource("18_1abcd")
+
+[node name="HealthLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/HealthContainer" unique_id=2043618608]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1.251058, 0.33173403, 0.4957448, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 10
+text = "90"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Overlay" type="TextureRect" parent="UI/Control/MarginContainer" unique_id=994525051]
+layout_mode = 2
+texture = ExtResource("21_leysx")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="GameOverMenu" parent="UI" unique_id=721452580 instance=ExtResource("16_78dh5")]
+game_over_data = ExtResource("19_4kmft")
 
 [node name="AudioVictory" type="AudioStreamPlayer" parent="UI" unique_id=234401189]
 process_mode = 3

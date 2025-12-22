@@ -174,14 +174,33 @@ I ignored that because I had **no inspiration for how to create a good one**. I 
 * But that means I need to find a very efficient way to display GIFTS DELIVERED (/TO DELIVER) and HEALTH LEFT around the minimap. A look that _also works in 2D mode_, when the minimap is gone!
 * Just creating a text label for this and sticking it next to it is simple, yes, but it looks horrible _and_ young kids playing it won't understand that. I wanted a _textless_ way to indicate progress.
 
-I ended up improving my OBG system so it supports "anchoring" the instructions to any side of the screen (not just top). This allowed moving it away so the minimap had more space there, and I could build that into one big beautiful UI element. (At least, that was the idea---there was an attempt.) Then I used a _progress bar_ made of Christmas lights/baubles set into the frame around the minimap to show your progress. When the minimap is gone, you only have that horizontal self-contained "bauble bar", so it still looks thematic and fine.
+I ended up improving my OBG system so it supports "anchoring" the instructions to any side of the screen (not just top). This allowed moving it away so the minimap had more space there, and I could build that into one big beautiful UI element. (At least, that was the idea---there was an attempt.) Then I used a _progress bar_ made of Christmas lights/baubles set into the frame around the minimap to show your progress. When the minimap is gone, you only have that horizontal self-contained "bauble bar", so it still looks thematic and fine. (It literally just hides all other elements and allows only that one score bar to grow and fill the space.)
 
-@TODO: IMAGE? IS THIS ACTUALLY WHAT I ENDED UP DOING?
+@TODO: IMAGE?
 
+This experience did teach me a lot of new things about Godot's UI capabilities, though. And mistakes I should avoid next time. I feel like this is one of the marks of becoming more "professional" as a game developer :p You spend most of your time on settings, localization, UI, accessibility, etcetera, and the game's contents are almost an afterthought at some points. 
 
 ## A Finished Game
 
-@TODO
+And there you have it. The third One Button Game ever is done, just before Christmas.
+
+My honest thoughts are that the game could have been prettier and a bit "more" than this. At the same time, I actually made the idea I set out to make, it works and looks fine, and players had a lot of fun. So I think that's mostly just the perfectionist artist inside me talking.
+
+I learned a lot about mixing 2D and 3D with this sort of "2.5D" style, as well as more advanced UI tricks and traps. Most of all, I learned---again---that simpler is better and that iterating on an idea actually makes the streamlined core shine through. Your initial idea is usually either impractical, too complicated, or too simplistic ("not actually a game yet"). 
+
+But take some days off, return with fresh eyes, and you might see the obvious solution. Such as simply creating two modes (2D and 3D), which made this game _much_ better and took only 30 minutes to do. The 2D mode is just plain couch coop fun for everyone, while the 3D mode is an actual challenge and test of teamwork and spatial awareness. 
+
+All of it simple enough that I actually prepared a tutorial ... and then realized it was no use displaying such a tiny obvious tutorial! No, no, I don't believe players will magically know how the game works from the start. There _will_ be a first few minutes in which players discover the handful of rules and interactions in the game. And that is _fine_. If a game can teach itself quickly while playing like that, I would always opt to do _that_ and not break the flow with some text tutorial.
+
+It's not an _amazing_ game, but I do think it's good enough to put on the online store and sell for a low price. 
+
+{{% remark %}}
+Though the long-term plan is to make these tiny OBGs free anyway, if I have enough other income to sustain that. I _want_ to offer these little local multiplayer toys for free!
+{{% /remark %}}
+
+Until next time,
+
+Pandaqi
 
 
 
@@ -191,27 +210,27 @@ I ended up improving my OBG system so it supports "anchoring" the instructions t
 
 
 
-**AI TRANSLATION PROMPT (worked great in Copilot):** I've attached a .csv file with the translations/localization for a video game made with the Godot Engine. It currently contains two columns ("en" for English, "nl" for Dutch). Can you add more columns with the proper translations (from English) in Spanish-Spain, French, German, Portuguese-Brazil and Italian? Please output them in valid CSV-file format (NOT a table), so I can immediately copy it into the file. Please make sure all translations are accurate and concise, taking the video game context into account.
+
+**AI TRANSLATION PROMPT (worked great in Copilot):** I've attached a .csv file with the translations/localization for a video game made with the Godot Engine. It currently contains two columns ("en" for English, "nl" for Dutch). Can you add more columns with the proper translations (from English) in Spanish-Spain (es), French (fr), German (de), Portuguese-Brazil (pt) and Italian (it)? Please output them in valid CSV-file format (NOT a table), so I can immediately copy it into the file. Please make sure all translations are accurate and concise, taking the video game context into account.
 
 (Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't verify those, so let them be.)
 
 
-VISUALS:
-
-* UI: show gifts delivered / left to deliver + sleigh damage
-  * **Have two christmas trees extend from the sides of the minimap!** (either horizontal or vertical, depends on what looks best)
-  * Alternatively, **CHRISTMAS BAUBLES** (and progress just means that more of them light up) --> maybe baubles _around_ the entire minimap?
-  * Best to neatly collect these around the minimap, to make it look really good and conserve space
-  * **REMEMBER** I already created the signals for this in `ui.gd`, all set up
-  * (ALSO MOVE MINIMAP BELOW OBG UI, OF COURSE, DON'T FORGET THAT.)
 
 
 POLISHING:
 
-* BUG: Minimap doesn't properly check if sleigh behind it.
+* Some marker of "you're in 2D mode" or "you're in 3D mode"
+* Prettier arrows for players + finetune speeds and stuff
+* Fix those black lines at edges of sprites?
 * Buildings could look prettier
-* Custom Game Settings
-* BUG: GameOver => adding GameOverData with a reference to MapData creates a CYCLIC DEPENDENCY, how to fix? What is a GENERAL CLEAN SYSTEM for this?
+* (Tutorial??)
+
+FINISH:
+
+* Set correct main scene + export
+* Record GIF ( + make actual product header image too?)
+
 
 COLLISION LAYERS:
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://cye4pxky1lgue"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_gfs3e"]
+
+[resource]
+script = ExtResource("1_gfs3e")
+type = 1
+key = "map_size_factor"
+label = "SETTING_MAP_SIZE"
+default = "1.0"
+min_value = 0.25
+max_value = 4.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

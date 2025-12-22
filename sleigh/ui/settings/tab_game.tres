@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="SettingTab" load_steps=4 format=3 uid="uid://caqj2vd4wt7wk"]
+[gd_resource type="Resource" script_class="SettingTab" load_steps=5 format=3 uid="uid://caqj2vd4wt7wk"]
 
 [ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_g5j8q"]
 [ext_resource type="Script" uid="uid://bk8734ulnri1t" path="res://pq-obg/settings/setting_tab.gd" id="2_4ytsv"]
-[ext_resource type="Resource" uid="uid://ch6fbk5gkjyge" path="res://sleigh/ui/settings/group_game.tres" id="2_vofip"]
+[ext_resource type="Resource" uid="uid://ch6fbk5gkjyge" path="res://sleigh/ui/settings/group_map.tres" id="2_vofip"]
+[ext_resource type="Resource" uid="uid://bwiko8w3s1xqh" path="res://sleigh/ui/settings/group_sleigh.tres" id="3_o7nne"]
 
 [resource]
 script = ExtResource("2_4ytsv")
-groups = Array[ExtResource("1_g5j8q")]([ExtResource("2_vofip")])
-label = "TAB_GAME"
+groups = Array[ExtResource("1_g5j8q")]([ExtResource("2_vofip"), ExtResource("3_o7nne")])
+label = "ST_TAB_GAME"
 metadata/_custom_type_script = "uid://bk8734ulnri1t"

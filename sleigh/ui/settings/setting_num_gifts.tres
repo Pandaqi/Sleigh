@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://cay0oiqx5b4xj"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_t7mej"]
+
+[resource]
+script = ExtResource("1_t7mej")
+type = 1
+key = "num_gifts_factor"
+label = "SETTING_NUM_GIFTS"
+default = "1.0"
+min_value = 0.1
+max_value = 4.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"

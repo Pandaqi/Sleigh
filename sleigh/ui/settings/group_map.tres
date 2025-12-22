@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=7 format=3 uid="uid://ch6fbk5gkjyge"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_2ghsp"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_saorn"]
+[ext_resource type="Resource" uid="uid://v6fbqkcw2qg6" path="res://sleigh/ui/settings/setting_mode.tres" id="3_bhao0"]
+[ext_resource type="Resource" uid="uid://cye4pxky1lgue" path="res://sleigh/ui/settings/setting_map_size.tres" id="4_rpvwm"]
+[ext_resource type="Resource" uid="uid://c2fwvqbc8qb6b" path="res://sleigh/ui/settings/setting_num_buildings.tres" id="5_dph0h"]
+[ext_resource type="Resource" uid="uid://cay0oiqx5b4xj" path="res://sleigh/ui/settings/setting_num_gifts.tres" id="6_k3w6p"]
+
+[resource]
+script = ExtResource("1_2ghsp")
+settings = Array[ExtResource("2_saorn")]([ExtResource("3_bhao0"), ExtResource("4_rpvwm"), ExtResource("5_dph0h"), ExtResource("6_k3w6p")])
+label = "SETTING_GROUP_MAP"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

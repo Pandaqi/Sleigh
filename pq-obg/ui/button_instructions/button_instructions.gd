@@ -25,7 +25,7 @@ func update_anchor() -> void:
 	var anchor := Global.config_system.button_instructions_anchor
 	var preset := ScreenAnchorTool.get_control_preset(anchor)
 	root_container.set_anchors_preset(preset, true)
-	margin_container.set_anchors_preset(preset, true) # this one needs to be updated too, otherwise it will anchor correctly ... but put the contents off-screen half the time.
+	# margin_container.set_anchors_preset(preset, true) # this one needs to be updated too, otherwise it will anchor correctly ... but put the contents off-screen half the time.
 
 func create_touch_area_layer() -> void:
 	var node := CanvasLayer.new()

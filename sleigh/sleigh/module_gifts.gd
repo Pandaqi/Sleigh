@@ -2,6 +2,7 @@ extends Node3D
 class_name ModuleGifts
 
 var gifts : Array[Gift]
+var num_delivered := 0
 var max_gifts_allowed : int
 @export var audio_delivery : AudioStreamPlayer2D
 
@@ -37,6 +38,8 @@ func collect_gift(g:Gift) -> void:
 func deliver_gifts(arr:Array[Gift]) -> void:
 	audio_delivery.pitch_scale = AudioManager.get_pitch_shift_semitones()
 	audio_delivery.play()
+	
+	num_delivered += arr.size()
 	
 	for gift in arr:
 		gifts.erase(gift)

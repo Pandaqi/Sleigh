@@ -22,6 +22,7 @@ class_name ConfigData
 @export var sleigh_damping := 2.3
 
 @export_subgroup("Arrows")
+@export var arrow_speed_factor := 1.0
 @export var arrow_flip_interval := 5.0
 @export var arrow_rotate_speed := 1.0
 @export var arrow_sway_speed := 2.0
@@ -31,6 +32,7 @@ class_name ConfigData
 
 @export_subgroup("Damage")
 ## this prevents animations/tweens from firing far too quickly + is just nicer to players
+@export var damage_enabled := true
 @export var collision_shield_duration := 0.4 
 @export var turn_off_damage_in_2d := true
 @export var collision_damage_factor := 50.0
@@ -40,16 +42,11 @@ class_name ConfigData
 @export var gift_size := 0.5
 
 @export_group("Objective")
-@export_subgroup("Target")
-@export var gifts_target_min : int = 10
-@export var gifts_target_max : int = 40
-@export var gifts_target_factor := 1.0
-
 @export_subgroup("Score")
-@export var score_per_gift := 10.0
-@export var score_bonus_win := 100.0
+@export var score_per_gift := 6.0
+@export var score_bonus_win := 35.0
 ## maximum multiplier for quicker deliveries
-@export var score_time_bonus := 3.0
+@export var score_time_bonus := 2.0
 ## if you waited this long, time_bonus is reduced to nothing (1.0)
 @export var max_time_between_deliveries := 10.0
 ## divides final score for next gift by this

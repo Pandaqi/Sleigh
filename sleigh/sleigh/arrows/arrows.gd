@@ -128,16 +128,16 @@ func rotate_arrows(delta: float) -> void:
 	# rotation is simpler but only possible in 2D
 	var should_rotate := Global.config.in_mode_2d() and Global.config.arrow_rotate_on_mode_2d
 	if should_rotate:
-		rotate(delta * Global.config.arrow_rotate_speed)
+		rotate(delta * Global.config.arrow_rotate_speed * Global.config.arrow_speed_factor)
 		return
 	
 	# "swaying" is the default
-	var speed := delta * Global.config.arrow_sway_speed
+	var speed := delta * Global.config.arrow_sway_speed * Global.config.arrow_speed_factor
 	rotation_time_tracker += speed
 	set_rotation(Global.config.arrow_max_sway * sin(rotation_time_tracker) * 0.5 * PI)
 
 func flip_arrows(delta:float) -> void:
-	var speed := delta * Global.config.arrow_flip_speed
+	var speed := delta * Global.config.arrow_flip_speed * Global.config.arrow_speed_factor
 	flip_time_tracker += speed
 
 func is_flipped() -> bool:

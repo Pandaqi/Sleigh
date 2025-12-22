@@ -6,6 +6,7 @@ class_name GameOverMenu
 @export var forward_btn : Button
 @export var anim_player : AnimationPlayer
 @export var overlay : Control
+@export var game_over_data : GameOverData
 
 func _ready():
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
@@ -17,7 +18,6 @@ func activate():
 	
 	label_header.add_theme_font_override("font", Global.theme.get_font(ThemeManager.FontType.HEADING))
 	
-	var game_over_data := Global.config_system.game_over_data
 	if game_over_data:
 		label_header.text = game_over_data.get_header()
 		label_explanation.text = game_over_data.get_message()

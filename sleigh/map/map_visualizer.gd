@@ -47,6 +47,7 @@ func visualize(g:MapGenerator) -> void:
 		map_data.buildings.append(b)
 	
 	# the gifts
+	map_data.gifts_to_deliver = g.count_gifts()
 	var gift_size := Global.config.gift_size
 	for i in range(g.count_gifts()):
 		var gift : Gift = gift_scene.instantiate()

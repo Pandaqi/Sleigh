@@ -17,8 +17,10 @@ func _ready() -> void:
 	overlay.modulate.a = Global.config_system.ui_overlay_alpha
 	
 	# anchor the pause screen to whatever side we want
-	var anchor_tool := ScreenAnchorTool.new(Global.config_system.pause_menu_anchor)
-	anchor_tool.set_control_node(pause_menu_container)
+	var preset := ScreenAnchorTool.get_control_preset(Global.config_system.pause_menu_anchor)
+	pause_menu_container.set_anchors_and_offsets_preset(preset, Control.PRESET_MODE_MINSIZE)
+	
+	# read the right icons for basic UI stuff
 	set_icons()
 
 func set_icons() -> void:

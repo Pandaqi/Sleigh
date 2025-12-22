@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SettingGroup" load_steps=8 format=3 uid="uid://bwiko8w3s1xqh"]
+
+[ext_resource type="Script" uid="uid://c7uqyg8sqnc02" path="res://pq-obg/settings/setting_group.gd" id="1_8qcqm"]
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="2_r7csb"]
+[ext_resource type="Resource" uid="uid://b4cpj1gx8mc32" path="res://sleigh/ui/settings/setting_sleigh_lift.tres" id="3_fo7pk"]
+[ext_resource type="Resource" uid="uid://dewpknf7wrdqb" path="res://sleigh/ui/settings/setting_sleigh_move.tres" id="4_ns6ev"]
+[ext_resource type="Resource" uid="uid://bpl4dsfrxnx2x" path="res://sleigh/ui/settings/setting_damage_enabled.tres" id="5_rw4bo"]
+[ext_resource type="Resource" uid="uid://nkiefcrf445v" path="res://sleigh/ui/settings/setting_floor_damage.tres" id="6_khyvs"]
+[ext_resource type="Resource" uid="uid://bn125yo88bnk7" path="res://sleigh/ui/settings/setting_arrow_speed.tres" id="7_g220f"]
+
+[resource]
+script = ExtResource("1_8qcqm")
+settings = Array[ExtResource("2_r7csb")]([ExtResource("3_fo7pk"), ExtResource("4_ns6ev"), ExtResource("5_rw4bo"), ExtResource("6_khyvs"), ExtResource("7_g220f")])
+label = "SETTING_GROUP_SLEIGH"
+metadata/_custom_type_script = "uid://c7uqyg8sqnc02"

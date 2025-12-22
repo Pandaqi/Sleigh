@@ -7,7 +7,6 @@ class_name ConfigSystemData
 @export var game_author : String = "Tiamo Pastoor"
 @export var language_default := "en"
 @export var game_scene : String
-@export var game_over_data : GameOverData
 @export var fullscreen := true
 
 @export_group("Settings")

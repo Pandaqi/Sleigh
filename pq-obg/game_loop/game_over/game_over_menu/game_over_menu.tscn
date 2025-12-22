@@ -74,6 +74,7 @@ mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=2097001032]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
@@ -81,14 +82,17 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=1644897548]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=366350373]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("4_1sfma")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1753177734]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Heading" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2118535056]
 layout_mode = 2
@@ -108,6 +112,7 @@ autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1899166251]
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Backward" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1774295688]

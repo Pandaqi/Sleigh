@@ -23,8 +23,11 @@ func _on_sleigh_collided(_b:Building) -> void:
 	num_collisions_since_last_delivery += 1
 
 func _on_gifts_delivered(gifts:Array[Gift], _b:Building) -> void:
+	if gifts.size() <= 0: return
+	
 	var score_change := Global.config.score_per_gift * gifts.size()
-	score_change /= Global.config.score_penalty_per_collision * num_collisions_since_last_delivery
+	if num_collisions_since_last_delivery > 0:
+		score_change /= Global.config.score_penalty_per_collision * num_collisions_since_last_delivery
 	
 	var time_since_last_delivery := (Time.get_ticks_msec() - time_last_delivery) / 1000.0
 	var time_ratio := clampf(time_since_last_delivery / Global.config.max_time_between_deliveries, 0.0, 1.0)

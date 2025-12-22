@@ -13,6 +13,7 @@ var num_times_shown := 0
 
 func _ready() -> void:
 	enabled = Global.config_system.tutorial_enabled
+	if not enabled: hide()
 	prepare_sprites()
 
 func prepare_sprites() -> void:

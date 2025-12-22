@@ -6,7 +6,7 @@
 script = ExtResource("1_qmku5")
 type = 3
 key = "play_mode"
-label = "ST_PLAY_MODE"
+label = "SETTING_PLAY_MODE"
 default = "2D"
 options = ["2D", "3D"]
 metadata/_custom_type_script = "uid://cu5ytdnryre03"

@@ -2,21 +2,18 @@ extends Node2D
 class_name MiniMap
 
 const SIZE := Vector2i(192, 96)
-const EDGE_MARGIN := 16
 
 const MIN_ELEMENT_SIZE := 12.0
 const MAX_ELEMENT_SIZE := 96.0
 
-var top_left_world : Vector3
-var bottom_right_world : Vector3
+var top_left_2d : Vector2
+var bottom_right_2d : Vector2
 
 @export var map_data : MapData
 @export var texture_assets : Texture
+@export var ui_container : Control
 
-func _ready() -> void:
-	get_viewport().size_changed.connect(_on_size_changed)
-	_on_size_changed()
-	set_visible(Global.config.in_mode_3d())
+const MINIMAP_ALPHA_IF_SLEIGH_BEHIND := 0.11
 
 func _draw() -> void:
 	var map_size := map_data.bounds
@@ -35,10 +32,12 @@ func _draw() -> void:
 		draw_rect_rounded(b.module_mini_map, map_scale)
 		draw_asset_texture(b.module_mini_map, map_scale, b.type_wanted)
 	
-	# GIFTS: type only --> @TODO: or just go back to vague circles?
+	# GIFTS: type only
 	for g in map_data.gifts:
 		if g.is_in_sleigh(): continue
-		draw_asset_texture(g.module_mini_map, map_scale, g.type)
+		var color := Gift.get_gift_color_for_type(g.type)
+		draw_circle_from_module(g.module_mini_map, map_scale, color)
+		# draw_asset_texture(g.module_mini_map, map_scale, g.type)
 	
 	# SLEIGH
 	draw_rect_rounded(map_data.sleigh.module_mini_map, map_scale, true)
@@ -54,6 +53,11 @@ func draw_asset_texture(m:ModuleMiniMap, map_scale:Vector2, type: Gift.Type) -> 
 	
 	var rect_source := Rect2(Vector2(type*256.0, 0), Vector2(256, 256))
 	draw_texture_rect_region(texture_assets, rect_square, rect_source)
+
+func draw_circle_from_module(m:ModuleMiniMap, map_scale:Vector2, color:Color) -> void:
+	var rect := m.get_rect(map_scale)
+	draw_circle(rect.get_center(), rect.size.x, color, true, -1, true)
+	draw_circle(rect.get_center(), rect.size.x, color.darkened(0.5), false, 0.4, true)
 
 func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false) -> void:
 	var border_radius := 4
@@ -74,19 +78,17 @@ func _physics_process(delta: float) -> void:
 
 func check_sleigh_behind_us(delta: float) -> void:
 	if not map_data.sleigh: return
-	var sleigh_pos := map_data.sleigh.global_position
-	# @NOTE: y is flipped because 2D y goes _down_ and 3D y goes _up_
-	var is_behind := sleigh_pos.x > top_left_world.x and sleigh_pos.x < bottom_right_world.x and sleigh_pos.y < top_left_world.y and sleigh_pos.y > bottom_right_world.y
-	var target_alpha := 0.33 if is_behind else 1.0
-	modulate.a = lerpf(modulate.a, target_alpha, delta*10.0)
-
-func _on_size_changed() -> void:
-	var vp := get_viewport().get_visible_rect().size
-	var pos := Vector2(0.5*vp.x, 0.5*SIZE.y + EDGE_MARGIN)
-	set_position(pos)
 	
+	# get our bounding box right now
+	# we use 0.66 instead of 0.5 to get a little extra margin around it
+	var pos := global_position
+	top_left_2d = Vector2(pos.x - 0.66*SIZE.x, pos.y - 0.66*SIZE.y)
+	bottom_right_2d = Vector2(pos.x + 0.66*SIZE.x, pos.y + 0.66*SIZE.y)
+	
+	# check against sleigh
 	var camera := get_viewport().get_camera_3d()
-	var top_left_2d := Vector2(pos.x - 0.5*SIZE.x, -SIZE.y)
-	top_left_world = camera.project_position(top_left_2d, camera.position.z)
-	var bottom_right_2d := Vector2(pos.x + 0.5*SIZE.x, 0)
-	bottom_right_world = camera.project_position(bottom_right_2d, camera.position.z)
+	var sleigh_pos := camera.unproject_position(map_data.sleigh.global_position)
+	# @NOTE: y is flipped because 2D y goes _down_ and 3D y goes _up_
+	var is_behind := sleigh_pos.x > top_left_2d.x and sleigh_pos.x < bottom_right_2d.x and sleigh_pos.y > top_left_2d.y and sleigh_pos.y < bottom_right_2d.y
+	var target_alpha := MINIMAP_ALPHA_IF_SLEIGH_BEHIND if is_behind else 1.0
+	ui_container.modulate.a = lerpf(ui_container.modulate.a, target_alpha, delta*10.0)

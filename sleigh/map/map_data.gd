@@ -4,12 +4,8 @@ class_name MapData
 var bounds : Vector3
 var buildings : Array[Building]
 var gifts : Array[Gift]
+var gifts_to_deliver := 0
 var sleigh : Sleigh
-
-var game_over_good := false
-var score : int = 0
-var time_played : int = 0
-var win := false
 
 func reset() -> void:
 	buildings = []

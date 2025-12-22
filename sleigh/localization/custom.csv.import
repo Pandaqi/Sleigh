@@ -6,10 +6,10 @@ uid="uid://cn6aeumcvijey"
 
 [deps]
 
-files=["res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation"]
+files=["res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation", "res://sleigh/localization/custom.es.translation", "res://sleigh/localization/custom.fr.translation", "res://sleigh/localization/custom.de.translation", "res://sleigh/localization/custom.pt.translation", "res://sleigh/localization/custom.it.translation"]
 
 source_file="res://sleigh/localization/custom.csv"
-dest_files=["res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation"]
+dest_files=["res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation", "res://sleigh/localization/custom.es.translation", "res://sleigh/localization/custom.fr.translation", "res://sleigh/localization/custom.de.translation", "res://sleigh/localization/custom.pt.translation", "res://sleigh/localization/custom.it.translation"]
 
 [params]
 

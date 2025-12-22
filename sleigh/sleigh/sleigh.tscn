@@ -159,7 +159,6 @@ timer = NodePath("Timer")
 [node name="AudioBells" type="AudioStreamPlayer2D" parent="ModuleMover" unique_id=1702382712]
 stream = ExtResource("9_6n86x")
 volume_db = -6.0
-bus = &"Game"
 
 [node name="ModuleMiniMap" type="Node3D" parent="." unique_id=1580184528]
 script = ExtResource("3_0l66c")
@@ -182,7 +181,6 @@ one_shot = true
 
 [node name="AudioBounce" type="AudioStreamPlayer2D" parent="ModuleCollider" unique_id=1398577870]
 stream = ExtResource("12_tb4y2")
-bus = &"Game"
 
 [node name="ModuleGifts" type="Node3D" parent="." unique_id=1700441615 node_paths=PackedStringArray("audio_delivery")]
 script = ExtResource("6_foh4u")
@@ -191,7 +189,6 @@ map_data = ExtResource("7_0l66c")
 
 [node name="AudioDelivery" type="AudioStreamPlayer2D" parent="ModuleGifts" unique_id=771027520]
 stream = ExtResource("15_408hu")
-bus = &"Game"
 
 [node name="ModuleHealth" type="Node3D" parent="." unique_id=296194529 node_paths=PackedStringArray("body")]
 script = ExtResource("7_hm7cj")

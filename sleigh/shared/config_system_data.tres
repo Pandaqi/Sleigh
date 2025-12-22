@@ -36,6 +36,7 @@ font_body_bold_italic = ExtResource("4_ic8br")
 font_heading = ExtResource("7_i4w8a")
 font_special = ExtResource("7_i4w8a")
 color_main = Color(0.32156864, 0.34117648, 0.5137255, 1)
+pause_menu_anchor = 0
 button_instructions_anchor = 3
 button_visualizer_scale_base = 0.04
 metadata/_custom_type_script = "uid://dui163ptds6sq"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Setting" load_steps=2 format=3 uid="uid://b4cpj1gx8mc32"]
+
+[ext_resource type="Script" uid="uid://cu5ytdnryre03" path="res://pq-obg/settings/setting.gd" id="1_5oypb"]
+
+[resource]
+script = ExtResource("1_5oypb")
+type = 1
+key = "sleigh_lift_force"
+label = "SETTING_SLEIGH_LIFT"
+min_value = 5.0
+max_value = 50.0
+metadata/_custom_type_script = "uid://cu5ytdnryre03"
