@@ -1,7 +1,6 @@
 extends Resource
 class_name StateData
 
-var touch_area_layer : Control
 var tracker_temporary : ObjectiveTracker
 var tracker_permanent : ObjectiveTracker
 var final_score := 0.0 # used by custom games that just need to save a score and nothing else; much simpler

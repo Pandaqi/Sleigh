@@ -201,38 +201,3 @@ Though the long-term plan is to make these tiny OBGs free anyway, if I have enou
 Until next time,
 
 Pandaqi
-
-
-
-
-
-
-
-
-
-
-**AI TRANSLATION PROMPT (worked great in Copilot):** I've attached a .csv file with the translations/localization for a video game made with the Godot Engine. It currently contains two columns ("en" for English, "nl" for Dutch). Can you add more columns with the proper translations (from English) in Spanish-Spain (es), French (fr), German (de), Portuguese-Brazil (pt) and Italian (it)? Please output them in valid CSV-file format (NOT a table), so I can immediately copy it into the file. Please make sure all translations are accurate and concise, taking the video game context into account.
-
-(Most common other languages are Simplified Chinese, Japanese, Russian, Turkish/Thai. But they all require extra fonts and I _really_ can't verify those, so let them be.)
-
-
-
-
-POLISHING:
-
-* Some marker of "you're in 2D mode" or "you're in 3D mode"
-* Prettier arrows for players + finetune speeds and stuff
-* Fix those black lines at edges of sprites?
-* Buildings could look prettier
-* (Tutorial??)
-
-FINISH:
-
-* Set correct main scene + export
-* Record GIF ( + make actual product header image too?)
-
-
-COLLISION LAYERS:
-
-* 1 = all
-* 2 = gifts

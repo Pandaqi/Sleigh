@@ -12,6 +12,7 @@ func reset(colors:Array[Color]) -> void:
 	players = []
 	colors_available = colors.duplicate()
 	colors_used = []
+	touch_area_layer = null
 	reset_finished.emit()
 
 func add_player(p:PlayerSystem) -> void:

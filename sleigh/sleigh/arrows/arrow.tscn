@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpwadqkd6fex0"]
+[gd_scene load_steps=4 format=3 uid="uid://dpwadqkd6fex0"]
 
 [ext_resource type="Script" uid="uid://mw82npxafqk5" path="res://sleigh/sleigh/arrows/arrow.gd" id="1_6llm4"]
-[ext_resource type="Texture2D" uid="uid://cikhqhc0hfaxm" path="res://pq-obg/ui/textures/icon_play.tres" id="2_kpogm"]
+[ext_resource type="Texture2D" uid="uid://8oxgcl4l2gnx" path="res://sleigh/sleigh/arrows/arrow_texture_flip.tres" id="2_kpogm"]
+[ext_resource type="Texture2D" uid="uid://b1jpl713ovpi2" path="res://sleigh/sleigh/arrows/arrow_texture_rotate.tres" id="2_w35eh"]
 
 [node name="Arrow" type="Node2D" unique_id=346282930 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_6llm4")
 sprite = NodePath("Sprite2D")
+tex_rotate = ExtResource("2_w35eh")
+tex_flip = ExtResource("2_kpogm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1063378161]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_kpogm")

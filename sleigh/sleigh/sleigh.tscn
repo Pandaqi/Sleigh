@@ -147,6 +147,7 @@ audio_bells = NodePath("AudioBells")
 arrows = NodePath("Arrows")
 
 [node name="Arrows" type="Node2D" parent="ModuleMover" unique_id=1610889629 node_paths=PackedStringArray("arrow_container", "timer")]
+process_mode = 3
 script = ExtResource("5_foh4u")
 arrow_scene = ExtResource("5_sgmq2")
 arrow_container = NodePath(".")

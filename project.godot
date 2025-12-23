@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sleigh"
-run/main_scene="uid://dhexc5kxv8rjt"
+run/main_scene="uid://cgdjav32fnyi8"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://dabxnenavdoqm"
 
@@ -43,7 +43,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation", "res://sleigh/localization/custom.de.translation", "res://sleigh/localization/custom.es.translation", "res://sleigh/localization/custom.fr.translation", "res://sleigh/localization/custom.it.translation", "res://sleigh/localization/custom.pt.translation")
+locale/translations=PackedStringArray("res://pq-obg/localization/obg.en.translation", "res://pq-obg/localization/obg.nl.translation", "res://pq-obg/localization/obg.de.translation", "res://pq-obg/localization/obg.es.translation", "res://pq-obg/localization/obg.fr.translation", "res://pq-obg/localization/obg.it.translation", "res://pq-obg/localization/obg.pt.translation", "res://sleigh/localization/custom.en.translation", "res://sleigh/localization/custom.nl.translation", "res://sleigh/localization/custom.de.translation", "res://sleigh/localization/custom.es.translation", "res://sleigh/localization/custom.fr.translation", "res://sleigh/localization/custom.it.translation", "res://sleigh/localization/custom.pt.translation")
 
 [physics]
 

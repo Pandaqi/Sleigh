@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://8oxgcl4l2gnx"]
+
+[ext_resource type="Texture2D" uid="uid://ukm4mtekm3x7" path="res://sleigh/shared/assets.webp" id="1_galyj"]
+
+[resource]
+atlas = ExtResource("1_galyj")
+region = Rect2(256, 512, 256, 256)

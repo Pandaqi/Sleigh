@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dhexc5kxv8rjt"]
+[gd_scene load_steps=32 format=3 uid="uid://dhexc5kxv8rjt"]
 
 [ext_resource type="Script" uid="uid://b2osy7g4nh1uw" path="res://sleigh/map/map.gd" id="1_3fl1h"]
 [ext_resource type="Script" uid="uid://cmo7eflm8fgbt" path="res://sleigh/map/camera/camera.gd" id="1_17jm3"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://c88ygjeu3x2os" path="res://sleigh/ui/finish_cheers.mp3" id="17_78dh5"]
 [ext_resource type="Texture2D" uid="uid://btl1ugfrt070k" path="res://sleigh/ui/bauble-progress-under.png" id="17_a5x6b"]
 [ext_resource type="Texture2D" uid="uid://cpijp8qp03rx8" path="res://sleigh/ui/bauble-progress-progress.png" id="18_1abcd"]
+[ext_resource type="FontFile" uid="uid://cdpbs4r7y1uw1" path="res://sleigh/ui/fonts/gomarice_kinako_mochi.ttf" id="18_a5x6b"]
 [ext_resource type="AudioStream" uid="uid://bwhvkf2di35xh" path="res://sleigh/ui/finish_bad.mp3" id="18_grhbm"]
 [ext_resource type="Resource" uid="uid://50loh51wa5mc" path="res://sleigh/ui/game_over_data.tres" id="19_4kmft"]
 [ext_resource type="Texture2D" uid="uid://qa4dpyhyxgqe" path="res://sleigh/ui/ui-overlay.png" id="21_leysx"]
@@ -50,6 +51,8 @@ albedo_texture = ExtResource("12_grf1u")
 uv1_scale = Vector3(5, 1, 1)
 
 [node name="Main" type="Node3D" unique_id=690436519]
+
+[node name="State" parent="." unique_id=1145839826 instance=ExtResource("16_cy4wp")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1696316319]
 environment = SubResource("Environment_efyhh")
@@ -106,7 +109,7 @@ script = ExtResource("10_i7510")
 map_data = ExtResource("4_f7sgw")
 ui = NodePath("../UI")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu", "audio_victory", "audio_loss", "margin_container", "background_node", "minimap_node", "health_node", "overlay_node", "score_label", "score_progress", "health_label", "health_progress")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2091701466 node_paths=PackedStringArray("score", "game_over_menu", "audio_victory", "audio_loss", "margin_container", "background_node", "minimap_node", "health_node", "overlay_node", "score_label", "score_progress", "health_label", "health_progress", "mode_label")]
 script = ExtResource("10_1iysh")
 score = NodePath("../Score")
 map_data = ExtResource("4_f7sgw")
@@ -123,6 +126,7 @@ score_progress = NodePath("Control/MarginContainer/VBoxContainer/ScoreContainer/
 health_label = NodePath("Control/MarginContainer/VBoxContainer/HealthContainer/HealthLabel")
 health_progress = NodePath("Control/MarginContainer/VBoxContainer/HealthContainer/HealthProgress")
 game_over_data = ExtResource("19_4kmft")
+mode_label = NodePath("ModeDisplay/Label")
 
 [node name="Control" type="CenterContainer" parent="UI" unique_id=1088968937]
 anchors_preset = 5
@@ -159,12 +163,12 @@ theme_override_constants/separation = 2
 alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/ScoreContainer" unique_id=1209074881]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 theme_override_colors/font_color = Color(1.2747362, 1.2380934, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("18_a5x6b")
 theme_override_font_sizes/font_size = 10
 text = "90"
 horizontal_alignment = 1
@@ -175,6 +179,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(136, 12)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 nine_patch_stretch = true
 texture_under = ExtResource("17_a5x6b")
 texture_progress = ExtResource("18_1abcd")
@@ -200,6 +205,7 @@ alignment = 1
 custom_minimum_size = Vector2(136, 12)
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 4
 nine_patch_stretch = true
 texture_under = ExtResource("17_a5x6b")
 texture_progress = ExtResource("18_1abcd")
@@ -207,10 +213,10 @@ texture_progress = ExtResource("18_1abcd")
 [node name="HealthLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/HealthContainer" unique_id=2043618608]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(1.251058, 0.33173403, 0.4957448, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.52156866)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
+theme_override_colors/font_color = Color(1.251, 0.42885047, 0.5471341, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("18_a5x6b")
 theme_override_font_sizes/font_size = 10
 text = "90"
 horizontal_alignment = 1
@@ -234,6 +240,18 @@ stream = ExtResource("17_78dh5")
 process_mode = 3
 stream = ExtResource("18_grhbm")
 
-[node name="State" parent="." unique_id=1145839826 instance=ExtResource("16_cy4wp")]
+[node name="ModeDisplay" type="MarginContainer" parent="UI" unique_id=172306682]
+offset_right = 59.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="UI/ModeDisplay" unique_id=759158489]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.32498702, 0.4939344, 0.80890244, 1)
+theme_override_fonts/font = ExtResource("18_a5x6b")
+text = "Mode: 2D"
 
 [node name="ButtonInstructions" parent="." unique_id=13185939 instance=ExtResource("17_6g0k4")]

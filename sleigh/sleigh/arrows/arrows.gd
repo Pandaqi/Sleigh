@@ -30,6 +30,7 @@ func create(ui_container:CanvasLayer) -> void:
 		var a : Arrow = arrow_scene.instantiate()
 		arrows.append(a)
 		a.set_vector(dir)
+		a.hide()
 		arrow_container.add_child(a)
 	
 	var counter := 0

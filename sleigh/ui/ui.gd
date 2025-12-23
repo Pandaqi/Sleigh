@@ -19,6 +19,7 @@ class_name UI
 @export var health_progress : TextureProgressBar
 
 @export var game_over_data : GameOverDataCustom
+@export var mode_label : Label
 
 var game_over := false
 
@@ -34,6 +35,8 @@ func _ready() -> void:
 	
 	_on_health_changed(1.0)
 	_on_score_changed(0.0)
+	
+	mode_label.set_text("3D" if Global.config.in_mode_3d() else "2D")
 
 func update_visibility_for_mode() -> void:
 	var is_3d := Global.config.in_mode_3d()
