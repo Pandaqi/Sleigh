@@ -195,6 +195,7 @@ script = ExtResource("10_fqevc")
 map_data = ExtResource("4_f7sgw")
 texture_assets = ExtResource("11_j7nqt")
 ui_container = NodePath("../../../..")
+bg_color = Color(0.8044069, 0.8654831, 0.96269256, 1)
 
 [node name="HealthContainer" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer" unique_id=1158579524]
 layout_mode = 2

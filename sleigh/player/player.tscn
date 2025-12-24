@@ -12,6 +12,7 @@ module_input = NodePath("ModuleInput")
 [node name="ModuleInput" type="Node" parent="." unique_id=103320983]
 script = ExtResource("2_404ue")
 
-[node name="ModuleArrows" type="Node" parent="." unique_id=2100384139 node_paths=PackedStringArray("module_input")]
+[node name="ModuleArrows" type="Node" parent="." unique_id=2100384139 node_paths=PackedStringArray("player", "module_input")]
 script = ExtResource("3_otgld")
+player = NodePath("..")
 module_input = NodePath("../ModuleInput")

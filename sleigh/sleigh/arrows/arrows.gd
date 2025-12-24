@@ -12,6 +12,7 @@ var arrow_dirs := [Vector3.RIGHT, Vector3(1,-1,0), Vector3.DOWN, Vector3(-1,-1,0
 @export var timer : Timer
 @export var use_flip_arrows_instant_method := false
 
+var arrows_assigned : Array[Arrow] = []
 var z_arrows_flipped := false
 var flip_time_tracker := 0.0
 var rotation_time_tracker := 0.0
@@ -67,6 +68,7 @@ func _on_buttons_changed() -> void:
 		(p as Player).module_arrows.clear()
 	
 	var arrows_to_assign := determine_arrows_to_assign()
+	arrows_assigned = arrows_to_assign
 	
 	var counter := 0
 	for arrow in arrows_to_assign:
@@ -85,29 +87,18 @@ func determine_arrows_to_assign() -> Array[Arrow]:
 	var fl_arrows := get_flipping_arrows()
 	
 	## 3D MODE ##
+	var arrow_order : Array[Arrow] = arrows
 	if Global.config.in_mode_3d():
-		# up, front/back
-		if num_players <= 2:
-			return [rot_arrows[6], fl_arrows[0]]
-		
-		# up, right, left, front/back
-		if num_players <= 4:
-			return [rot_arrows[6], rot_arrows[0], rot_arrows[4], fl_arrows[0]]
-		
-		return arrows
+		arrow_order = [rot_arrows[6], fl_arrows[0], rot_arrows[4], fl_arrows[1], rot_arrows[2], rot_arrows[0], rot_arrows[5], rot_arrows[1]]
 	
 	## 2D MODE ##
 	# No flipping arrows; more diagonal options
 	if Global.config.in_mode_2d():
-		if num_players <= 2:
-			return [rot_arrows[6], rot_arrows[0]]
-		
-		if num_players <= 4:
-			return [rot_arrows[0], rot_arrows[2], rot_arrows[4], rot_arrows[6]]
-		
-		return rot_arrows
+		arrow_order = [rot_arrows[6], rot_arrows[0], rot_arrows[4], rot_arrows[2], rot_arrows[1], rot_arrows[3], rot_arrows[7], rot_arrows[5]]
 	
-	return arrows
+	var arrows_relevant : Array[Arrow] = []
+	arrows_relevant.assign(arrow_order.slice(0, num_players))
+	return arrows_relevant
 
 func arrow_dir_to_2d(dir:Vector3) -> Vector2:
 	var has_z_component := absf(dir.z) > 0.03
@@ -145,6 +136,13 @@ func is_flipped() -> bool:
 	return get_arrow_flip_ratio() < 0
 
 func get_arrow_flip_ratio() -> float:
+	var flipping_arrows := get_flipping_arrows()
+	var has_both_flip_arrows := arrows_assigned.has(flipping_arrows[0]) and arrows_assigned.has(flipping_arrows[1])
+	
+	# if it has both flip arrows, then there's no need to keep changing them; just lock them to their starting extremes
+	if has_both_flip_arrows:
+		return 1.0
+	
 	if use_flip_arrows_instant_method: 
 		return -1.0 if z_arrows_flipped else 1.0
 	return sin(flip_time_tracker)

@@ -180,6 +180,34 @@ I ended up improving my OBG system so it supports "anchoring" the instructions t
 
 This experience did teach me a lot of new things about Godot's UI capabilities, though. And mistakes I should avoid next time. I feel like this is one of the marks of becoming more "professional" as a game developer :p You spend most of your time on settings, localization, UI, accessibility, etcetera, and the game's contents are almost an afterthought at some points. 
 
+## A Playtest!
+
+It's unfortunately rare that I get to actually let random groups of people test my games. Until I can pay people for professional beta testing and such, it's just how it is.
+
+Anyway, at Christmas, people played my game. How did it go?
+
+* The 2D version was perfect. Easy to get into, just hard enough to be a fun challenge, just instant fun for a (large) group.
+* The 3D version was way too hard. This was partially just because the core idea requires more from you, but also because I'd made some mistakes and accidentally left some things turned on.
+
+And so, on Christmas Eve just before midnight, I spent some 30 minutes simply fixing those issues. 
+
+{{% remark %}}
+I've learned to just fix it right then and there, otherwise I'll forget about it or forget _how_ I should fix it, and then it takes a while to remember later---if at all.
+
+Think about it. I made the game "done" at the cost of going to bed 30 minutes later on Christmas Eve. If I hadn't, my first opportunity to work on it again would be once Christmas was over, and by that point I've forgotten the playtest and my mind is "out of the flow".
+{{% /remark %}}
+
+What exactly did I do?
+
+* I limited the arrows shown to just _exactly the number of players_. This was a bug; it should've always been this way. With 5 players, you should NOT get 6 arrows and someone doubling :p
+* I stopped "moving" the flipping arrows if both are present. That is, from 4(+) players, you have one player with FORWARD and one player with BACKWARD. There's no need to move them around over time (unlike the arrows rotating the sleigh). It's far simpler to use and understand if they're just fixed.
+* I gave the minimap a softer blue background. (Instead of the unnecessarily stark/bright pure white it was before. Especially seeing the game on a huge screen revealed the minimap was drawing far too much attention.)
+* I made the sleigh much bigger on the minimap, because some players struggled to see/find it (at least at first).
+
+The 3D version is still hard because, well, it has an extra dimension and requires even tighter collaboration. But now it's not unnecessarily hard anymore because of bugs and things not being as clear/obvious as they could be.
+
+Additionally, as stated elsewhere in this devlog, over time the 2D version simply became "the main version". That 3D version is now just a nice "bonus" added into the game for free. That's how these things go!
+
 ## A Finished Game
 
 And there you have it. The third One Button Game ever is done, just before Christmas.

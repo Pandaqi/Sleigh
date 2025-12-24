@@ -3,11 +3,13 @@ class_name ModuleArrows
 
 var arrows : Array[Arrow]
 
+@export var player : Player
 @export var module_input : ModuleInput
 
 func _ready() -> void:
 	module_input.pressed.connect(_on_pressed)
 	module_input.released.connect(_on_released)
+	player.killed.connect(_on_killed)
 
 func _physics_process(_delta: float) -> void:
 	keep_visualizers_with_arrows()
@@ -24,6 +26,9 @@ func keep_visualizers_with_arrows() -> void:
 func clear():
 	arrows = []
 	module_input.clear_button_visualizers()
+
+func _on_killed() -> void:
+	clear()
 
 func add(a:Arrow) -> void:
 	arrows.append(a)

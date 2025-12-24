@@ -12,6 +12,7 @@ var bottom_right_2d : Vector2
 @export var map_data : MapData
 @export var texture_assets : Texture
 @export var ui_container : Control
+@export var bg_color := Color.WHITE
 
 const MINIMAP_ALPHA_IF_SLEIGH_BEHIND := 0.11
 
@@ -24,7 +25,7 @@ func _draw() -> void:
 	var border_radius := 8
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
-	style_box.bg_color = Color.WHITE
+	style_box.bg_color = bg_color
 	draw_style_box(style_box, Rect2(-0.5*size_pixels, size_pixels))
 	
 	# BUILDINGS: rect for size, icon for type
@@ -40,7 +41,7 @@ func _draw() -> void:
 		# draw_asset_texture(g.module_mini_map, map_scale, g.type)
 	
 	# SLEIGH
-	draw_rect_rounded(map_data.sleigh.module_mini_map, map_scale, true)
+	draw_rect_rounded(map_data.sleigh.module_mini_map, map_scale, true, true)
 
 func draw_asset_texture(m:ModuleMiniMap, map_scale:Vector2, type: Gift.Type) -> void:
 	var rect := m.get_rect(map_scale)
@@ -59,7 +60,7 @@ func draw_circle_from_module(m:ModuleMiniMap, map_scale:Vector2, color:Color) ->
 	draw_circle(rect.get_center(), rect.size.x, color, true, -1, true)
 	draw_circle(rect.get_center(), rect.size.x, color.darkened(0.5), false, 0.4, true)
 
-func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false) -> void:
+func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false, border := false) -> void:
 	var border_radius := 4
 	var style_box = StyleBoxFlat.new()
 	style_box.set_corner_radius_all(border_radius)
@@ -69,6 +70,10 @@ func draw_rect_rounded(m:ModuleMiniMap, map_scale:Vector2, shadow := false) -> v
 		style_box.shadow_size = 3.0
 		style_box.shadow_color = Color.from_hsv(0, 0, 0, 0.45)
 		style_box.shadow_offset = Vector2.ZERO
+	
+	if border:
+		style_box.border_color = m.get_color().darkened(0.8)
+		style_box.set_border_width_all(1)
 	
 	draw_style_box(style_box, m.get_rect(map_scale))
 
